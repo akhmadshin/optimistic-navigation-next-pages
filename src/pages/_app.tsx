@@ -9,6 +9,7 @@ import { useSSRIntercept } from '@/hooks/useSSRIntercept';
 import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import WithQueryClientProvider from '@/components/WithQueryClientProvider';
+import { Page } from '@/components/pages/Page';
 
 export default function MyApp({ Component, pageProps }: AppProps) {
 	const router = useRouter();
@@ -25,7 +26,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 			<Header />
 			<main>
 				<Hydrate state={pageProps.dehydratedState}>
-					<Component {...pageProps} />
+					<Page>
+						<Component {...pageProps} />
+					</Page>
 				</Hydrate>
 			</main>
 			<div className="mt-16 sm:mt-32"></div>

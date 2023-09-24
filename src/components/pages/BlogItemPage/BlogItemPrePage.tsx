@@ -23,7 +23,7 @@ export const BlogItemPrePage: ParentComponent<Props> = ({ slug, children }) => {
 		return <></>;
 	}
 
-	const { title, publishedAt, description } = article || {};
+	const { title, description } = article || {};
 	const { height, width, url } = article?.cover?.data?.attributes as any || {};
 
 	return (
