@@ -12,8 +12,9 @@ interface Props {
 }
 
 export const BlogItemPrePage: ParentComponent<Props> = ({ slug, children }) => {
-	const queryOptions = getQueryOptions(slug);
 	const placeholderData = usePlaceholderStore(state => state.placeholder);
+	const queryOptions = getQueryOptions(slug);
+
 	const { data: article } = useQuery({
 		...queryOptions,
 		placeholderData,

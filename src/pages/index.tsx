@@ -4,7 +4,7 @@ import { HomePage } from '@/components/pages/HomePage';
 
 export async function getServerSideProps() {
 	const queryClient = new QueryClient();
-	await queryClient.prefetchQuery(getQueryOptions);
+	await queryClient.prefetchQuery(getQueryOptions());
 
 	return {
 		props: {

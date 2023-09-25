@@ -1,8 +1,8 @@
 import NextLink, { LinkProps } from 'next/link';
+import React, { KeyboardEvent, MouseEvent } from 'react';
 
 import { usePlaceholderStore } from '@/store/usePlaceholderStore';
 import { onActionKeyPress } from '@/lib/navigation-utils';
-import React, { KeyboardEvent, MouseEvent } from 'react';
 import { useUrl } from '@/hooks/useUrl';
 import { transitionHelper } from '@/lib/transition-utils';
 type LinkPropsReal = React.PropsWithChildren<

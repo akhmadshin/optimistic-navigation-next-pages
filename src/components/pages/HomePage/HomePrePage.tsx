@@ -1,9 +1,18 @@
 import React, { PropsWithChildren } from 'react';
 import { Container } from '@/components/Container';
+import { useQuery } from '@tanstack/react-query';
+import { getQueryOptions } from '@/components/pages/HomePage/getQueryOptions';
+import { Meta } from '@/components/Meta';
 
 export const HomePrePage: React.FC<PropsWithChildren> = ({ children }) => {
+	useQuery<unknown, unknown, any[]>(getQueryOptions());
+
 	return (
 		<Container className="mt-16 sm:mt-32">
+			<Meta
+				title="Home page"
+				description="Home description"
+			/>
 			<div className="max-w-2xl">
 				<h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
 					Aliquam aliquet ipsum eget velit rutrum sagittis. Ut tempus libero sem, at fringilla massa varius quis.
