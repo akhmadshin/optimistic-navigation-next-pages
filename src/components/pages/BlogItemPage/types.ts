@@ -1,3 +1,3 @@
 export type Props = {
-	params: { slug: string }
+  params: { slug: string }
 }
