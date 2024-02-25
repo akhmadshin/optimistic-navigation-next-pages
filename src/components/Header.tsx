@@ -5,14 +5,20 @@ export function Header() {
   return (
     <header
     >
-      <Container>
+      <Container className="mb-16">
         <div className="relative flex gap-4 pt-6">
-          <div className="flex flex-1">
+          <div className="flex flex-1 gap-16">
             <Link
               href="/"
               aria-label="Home"
             >
               <span className="font-bold">Home</span>
+            </Link>
+            <Link
+              href="/blog/lorem-ipsum/"
+              aria-label="Lorem ipsum"
+            >
+              <span className="font-bold">Lorem ipsum</span>
             </Link>
           </div>
         </div>

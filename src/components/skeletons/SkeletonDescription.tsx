@@ -1,13 +1,11 @@
 import { SkeletonText } from '@/components/skeletons/SkeletonText';
+import { Component } from '@/types/general';
 
-export default function SkeletonRichText() {
+export const SkeletonDescription: Component = () => {
   return (
-    <div className="space-y-1px mt-8">
+      <div className="flex flex-col">
       <SkeletonText width="95%"/>
       <SkeletonText width="75%"/>
-      <SkeletonText width="90%"/>
-      <SkeletonText width="100%"/>
-      <SkeletonText width="85%"/>
       <SkeletonText width="60%"/>
     </div>
   );

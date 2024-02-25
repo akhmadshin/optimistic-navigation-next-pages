@@ -4,7 +4,7 @@ export const Container: ParentComponent<any> = (
   {children, ...props},
 ) => {
   return (
-    <div className="sm:px-10" {...props}>
+    <div {...props}>
       <div className="mx-auto max-w-9xl w-full lg:px-10">
         <div
           className="relative px-6 sm:px-10 lg:px-12"

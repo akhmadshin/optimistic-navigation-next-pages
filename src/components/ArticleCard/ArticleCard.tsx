@@ -1,8 +1,8 @@
-import Image from 'next/image';
 import React, { useRef } from 'react';
 
 import { Link } from '@/components/Link';
 import { SkeletonArticleCard } from '@/components/ArticleCard/SkeletonArticleCard';
+import { Image } from '@/components/Image';
 
 
 export const ArticleCard: React.FC<any> = (props) => {
@@ -36,7 +36,6 @@ export const ArticleCard: React.FC<any> = (props) => {
       <div className="relative w-full">
         <Image
           alt=""
-          className=" w-full rounded-2xl bg-gray-100 object-cover"
           src={coverAttributes.url}
           ref={imageRef}
           width={coverAttributes.width}

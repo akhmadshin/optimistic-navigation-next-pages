@@ -1,4 +1,4 @@
-import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query'
+import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { getQueryOptions } from '@/components/pages/HomePage/getQueryOptions';
 import { HomePage } from '@/components/pages/HomePage';
 

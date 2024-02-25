@@ -8,7 +8,7 @@ export const HomePrePage: React.FC<PropsWithChildren> = ({children}) => {
   useQuery<unknown, unknown, any[]>(getQueryOptions());
 
   return (
-    <Container className="mt-16 sm:mt-32">
+    <Container>
       <Meta
         title="Home page"
         description="Home description"

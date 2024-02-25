@@ -15,7 +15,7 @@ export const HomePostPage = ({children}: any) => {
   }
 
   return (
-    <div className="mt-16 sm:mt-32">
+    <div className="mt-16">
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-10">
         {articles.map((article, index) => (
           <ArticleCard article={article} key={index}/>

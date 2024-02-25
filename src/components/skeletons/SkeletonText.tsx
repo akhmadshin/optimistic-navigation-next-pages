@@ -3,11 +3,13 @@ import { Component } from '@/types/general';
 interface Props {
   className?: string;
   width?: string;
+  as?: 'span' | 'h1' | 'h2' | 'h3';
 }
 
 export const SkeletonText: Component<Props> = (
   {
-    className = 'bg-zinc-600 dark:bg-zinc-400',
+    as = 'span',
+    className = '',
     width,
   },
 ) => {
@@ -16,12 +18,48 @@ export const SkeletonText: Component<Props> = (
     'animationFillMode': 'backwards',
     'animationDelay': '150ms',
   }
+  const skeletonClassName = `${className} bg-zinc-600 dark:bg-zinc-400 animate-pulse`;
+  if (as === 'span') {
+    return (
+      <span
+        className={skeletonClassName}
+        style={style}
+      >
+        &nbsp;
+      </span>
+    )
+  }
+  if (as === 'h1') {
+    return (
+      <h1
+        className={skeletonClassName}
+        style={style}
+      >
+        &nbsp;
+      </h1>
+    )
+  }
+  if (as === 'h2') {
+    return (
+      <h2
+        className={skeletonClassName}
+        style={style}
+      >
+        &nbsp;
+      </h2>
+    )
+  }
+  if (as === 'h3') {
+    return (
+      <h3
+        className={skeletonClassName}
+        style={style}
+      >
+        &nbsp;
+      </h3>
+    )
+  }
   return (
-    <div
-      className={`${className} animate-pulse`}
-      style={style}
-    >
-      &nbsp;
-    </div>
+    <></>
   );
 };

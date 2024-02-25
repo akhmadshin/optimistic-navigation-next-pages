@@ -1,7 +1,6 @@
 import NextLink, { LinkProps } from 'next/link';
 import React, { KeyboardEvent, MouseEvent } from 'react';
 
-import { usePlaceholderStore } from '@/store/usePlaceholderStore';
 import { onActionKeyPress } from '@/lib/navigation-utils';
 import { useUrl } from '@/hooks/useUrl';
 import { transitionHelper } from '@/lib/transition-utils';
@@ -32,8 +31,6 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkPropsModified>(funct
   } = props;
   const currentUrl = useUrl();
 
-  const setPlaceholder = usePlaceholderStore(state => state.setPlaceholder);
-
   const isAbsoluteUrlOrAnchorUrl = typeof href === 'string' && (/^http/.test(href) || /^#/.test(href));
   const isSameUrl = currentUrl === href;
 
@@ -62,16 +59,16 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkPropsModified>(funct
   }
 
   const handleLocalRouteNavigation = (data: any) => {
+    if (isSameUrl) {
+      return;
+    }
     if (data) {
-      setPlaceholder(data);
+      window.placeholderData = data;
     }
     startPageTransition();
   }
 
   const startPageTransition = () => {
-    if (isSameUrl) {
-      return;
-    }
     if (!window.pageMounted) {
       window.pageMountedPromise = new Promise(resolve => {
         window.pageMounted = resolve as any;
