@@ -2,7 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { Component } from '@/types/general';
 import getQueryOptions from '@/components/pages/BlogItemPage/getQueryOptions';
 import SkeletonBlogItemPostPage from '@/components/pages/BlogItemPage/SkeletonBlogItemPostPage';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { RichText } from '@/components/RichText';
 
 interface Props {
   slug: string;
@@ -20,9 +21,15 @@ export const BlogItemPostPage: Component<Props> = ({slug}) => {
     return <SkeletonBlogItemPostPage/>
   }
 
+  const articleAttributes = article.attributes;
+  const { content } = articleAttributes;
+
+
   return (
     <div className="mt-10">
-      <div className="prose lg:prose-xl max-w-none dark:prose-invert" dangerouslySetInnerHTML={{__html: article?.content}} />
+      <div className="prose lg:prose-xl max-w-none dark:prose-invert">
+        <RichText content={content} />
+      </div>
     </div>
   );
 }

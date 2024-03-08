@@ -10,16 +10,34 @@ import { AppProps } from 'next/app';
 import { useRouter } from 'next/router';
 import WithQueryClientProvider from '@/components/WithQueryClientProvider';
 import { Page } from '@/components/pages/Page';
+import { createRouteLoader } from '@/lib/route-loader';
+
+(() => {
+  if (typeof window === 'undefined') {
+    return;
+  }
+  window.navigator;
+  const routeLoader = createRouteLoader('');
+
+  console.log('prefetching');
+  routeLoader.prefetch('/').catch(e => console.log('error = ', e));
+  routeLoader.prefetch('/blog/[slug]').catch(e => console.log('error = ', e));
+})()
 
 export default function MyApp({Component, pageProps}: AppProps) {
+  useSSRIntercept();
   const router = useRouter();
 
   useEffect(() => {
-    router.prefetch('/');
-    router.prefetch('/blog/[slug]');
-  }, [])
-
-  useSSRIntercept();
+    if (!router) {
+      return;
+    }
+    setTimeout(() => {
+      console.log('prefetch');
+      router.prefetch('/').catch(e => console.log('error = ', e));
+      router.prefetch('/blog/[slug]').catch(e => console.log('error = ', e));
+    }, 1000)
+  }, [router])
 
   return (
     <WithQueryClientProvider>
