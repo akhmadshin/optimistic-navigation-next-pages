@@ -91,6 +91,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkPropsModified>(funct
       onClick={handleClick}
       onKeyPress={onActionKeyPress<HTMLAnchorElement>((e) => handleKeyPress(e))}
       href={href}
+      prefetch={false}
       ref={forwardedRef}
       {...restProps}
     >{children}</NextLink>
