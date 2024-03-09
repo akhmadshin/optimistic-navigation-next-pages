@@ -1,8 +1,8 @@
-import { fetchArticle } from '@/requests/articleRequests';
+import { fetchArticleDirectly } from '@/requests/articleRequests';
 
 export default (slug: string) => {
   return {
     queryKey: ['blog', slug],
-    queryFn: async () => fetchArticle(slug),
+    queryFn: async () => fetchArticleDirectly(slug),
   }
 }

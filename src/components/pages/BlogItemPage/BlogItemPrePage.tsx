@@ -10,19 +10,18 @@ import { Image } from '@/components/Image/Image';
 import SkeletonBlogItemPostPage from '@/components/pages/BlogItemPage/SkeletonBlogItemPostPage';
 import React from 'react';
 import { RichText } from '@/components/RichText/RichText';
+import getQueryOptionsClient from '@/components/pages/BlogItemPage/getQueryOptionsClient';
+import { useStaticPageData } from '@/hooks/useStaticPageData';
 
 interface Props {
   slug: string;
 }
 
 export const BlogItemPrePage: ParentComponent<Props> = ({slug, children}) => {
-  const queryOptions = getQueryOptions(slug);
   const placeholderData = getPlaceholderData();
+  const queryOptions = getQueryOptionsClient(slug);
 
-  const {data: article, isLoading, isFetching } = useQuery({
-    ...queryOptions,
-    placeholderData,
-  });
+  const { data: article, isLoading, isFetching} = useStaticPageData(['blog', slug], placeholderData);
 
   if (!article && (isLoading || isFetching)) {
     return (

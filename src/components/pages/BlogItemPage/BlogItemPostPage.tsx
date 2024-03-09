@@ -1,21 +1,15 @@
-import { useQuery } from '@tanstack/react-query';
 import { Component } from '@/types/general';
-import getQueryOptions from '@/components/pages/BlogItemPage/getQueryOptions';
 import SkeletonBlogItemPostPage from '@/components/pages/BlogItemPage/SkeletonBlogItemPostPage';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { RichText } from '@/components/RichText';
+import { useStaticPageData } from '@/hooks/useStaticPageData';
 
 interface Props {
   slug: string;
 }
 
 export const BlogItemPostPage: Component<Props> = ({slug}) => {
-  const queryOptions = getQueryOptions(slug);
-
-  const { data: article, isLoading, isFetching} = useQuery<unknown, unknown, any>({
-    ...queryOptions,
-    enabled: false,
-  });
+  const { data: article, isLoading, isFetching} = useStaticPageData(['blog', slug]);
 
   if (isLoading || isFetching) {
     return <SkeletonBlogItemPostPage/>

@@ -3,9 +3,10 @@ import { Container } from '@/components/Container';
 import { useQuery } from '@tanstack/react-query';
 import { getQueryOptions } from '@/components/pages/HomePage/getQueryOptions';
 import { Meta } from '@/components/Meta';
+import { useStaticPageData } from '@/hooks/useStaticPageData';
 
 export const HomePrePage: React.FC<PropsWithChildren> = ({children}) => {
-  useQuery<unknown, unknown, any[]>(getQueryOptions());
+  useStaticPageData(['/']);
 
   return (
     <Container>

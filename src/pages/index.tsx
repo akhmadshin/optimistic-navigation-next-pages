@@ -2,7 +2,7 @@ import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { getQueryOptions } from '@/components/pages/HomePage/getQueryOptions';
 import { HomePage } from '@/components/pages/HomePage';
 
-export async function getServerSideProps() {
+export const getStaticProps = async () => {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery(getQueryOptions());
 
@@ -15,6 +15,6 @@ export async function getServerSideProps() {
 
 export default function Page() {
   return (
-    <HomePage/>
+    <HomePage />
   )
 }

@@ -9,6 +9,7 @@ const BlogItemPostPage = dynamic(() => import('@/components/pages/BlogItemPage/B
 export const BlogItemPage: ParentComponent = () => {
   const router = useRouter();
   const slug = (router.query.slug || '') as string;
+
   return (
     <BlogItemPrePage slug={slug}>
       <BlogItemPostPage slug={slug}/>

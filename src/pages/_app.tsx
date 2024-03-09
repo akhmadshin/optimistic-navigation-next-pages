@@ -3,13 +3,15 @@ import '@/styles/globals.css'
 import {
   Hydrate,
 } from '@tanstack/react-query'
-import React from 'react';
+import React, { Suspense, useEffect, useLayoutEffect, useState } from 'react';
 import { Header } from '@/components/Header';
 import { useSSRIntercept } from '@/hooks/useSSRIntercept';
 import { AppProps } from 'next/app';
 import WithQueryClientProvider from '@/components/WithQueryClientProvider';
 import { Page } from '@/components/pages/Page';
 import { createRouteLoader } from '@/lib/route-loader';
+import PageRouter, { useRouter } from 'next/router';
+import { hydrate } from '@tanstack/query-core';
 
 (() => {
   if (typeof window === 'undefined') {
@@ -25,6 +27,13 @@ import { createRouteLoader } from '@/lib/route-loader';
 
 export default function MyApp({Component, pageProps}: AppProps) {
   useSSRIntercept();
+
+  const router = useRouter();
+
+  useEffect(() => {
+    router.prefetch = async () => { }
+  }, [router])
+
   return (
     <WithQueryClientProvider>
       <Header/>
