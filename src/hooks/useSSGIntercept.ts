@@ -2,7 +2,7 @@ import PageRouter, { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { dehydrate, useQueryClient } from '@tanstack/react-query';
 
-export const useSSRIntercept = () => {
+export const useSSGIntercept = () => {
   useEffect(() => {
 
     if (!PageRouter.router?.components) return;

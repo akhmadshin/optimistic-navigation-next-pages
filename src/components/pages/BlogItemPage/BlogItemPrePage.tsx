@@ -18,10 +18,7 @@ interface Props {
 }
 
 export const BlogItemPrePage: ParentComponent<Props> = ({slug, children}) => {
-  const placeholderData = getPlaceholderData();
-  const queryOptions = getQueryOptionsClient(slug);
-
-  const { data: article, isLoading, isFetching} = useStaticPageData(['blog', slug], placeholderData);
+  const { data: article, isLoading, isFetching} = useStaticPageData(['blog', slug]);
 
   if (!article && (isLoading || isFetching)) {
     return (

@@ -5,13 +5,12 @@ import {
 } from '@tanstack/react-query'
 import React, { Suspense, useEffect, useLayoutEffect, useState } from 'react';
 import { Header } from '@/components/Header';
-import { useSSRIntercept } from '@/hooks/useSSRIntercept';
+import { useSSGIntercept } from '@/hooks/useSSGIntercept';
 import { AppProps } from 'next/app';
 import WithQueryClientProvider from '@/components/WithQueryClientProvider';
 import { Page } from '@/components/pages/Page';
 import { createRouteLoader } from '@/lib/route-loader';
-import PageRouter, { useRouter } from 'next/router';
-import { hydrate } from '@tanstack/query-core';
+import { useRouter } from 'next/router';
 
 (() => {
   if (typeof window === 'undefined') {
@@ -26,7 +25,7 @@ import { hydrate } from '@tanstack/query-core';
 })()
 
 export default function MyApp({Component, pageProps}: AppProps) {
-  useSSRIntercept();
+  useSSGIntercept();
 
   const router = useRouter();
 

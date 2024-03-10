@@ -1,5 +1,3 @@
-'use client'
-
 import { ParentComponent } from '@/types/general';
 import { useQueryClient } from '@tanstack/react-query';
 import { useClientLayoutEffect } from '@/hooks/useClientLayoutEffect';

@@ -1,16 +1,16 @@
 import PageRouter, { useRouter } from 'next/router';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { getPlaceholderData } from '@/lib/utils';
 
-export const useStaticPageData = (queryKey: string[], placeholderData?: any) => {
+export const useStaticPageData = (queryKey: string[]) => {
   const router = useRouter();
   const client = useQueryClient();
+  const placeholderData = getPlaceholderData();
 
   return useQuery<unknown, unknown, any>({
     queryKey: router && client ? queryKey : undefined,
     placeholderData,
     queryFn: () => {
-      console.log('router = ', router);
-      console.log('PageRouter?.router = ', PageRouter?.router);
       if (router && PageRouter?.router) {
         return fetch(
           PageRouter.router!.pageLoader.getDataHref({
