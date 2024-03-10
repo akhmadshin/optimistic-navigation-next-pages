@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
-  basePath: '/blog-next-pages',
+  assetPrefix: './',
   output: 'export',
   images: {
     unoptimized: true,
