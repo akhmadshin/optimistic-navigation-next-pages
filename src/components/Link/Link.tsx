@@ -65,6 +65,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkPropsModified>(funct
     if (data) {
       window.placeholderData = data;
     }
+
     startPageTransition();
   }
 
