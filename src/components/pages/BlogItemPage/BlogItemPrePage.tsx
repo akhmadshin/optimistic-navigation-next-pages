@@ -1,36 +1,34 @@
-import { useQuery } from '@tanstack/react-query';
-
 import { ParentComponent } from '@/types/general';
-import getQueryOptions from '@/components/pages/BlogItemPage/getQueryOptions';
 import { Container } from '@/components/Container';
 import { Meta } from '@/components/Meta';
-import { getPlaceholderData } from '@/lib/utils';
 import { SkeletonBlogItemPrePage } from '@/components/pages/BlogItemPage/SkeletonBlogItemPrePage';
 import { Image } from '@/components/Image/Image';
 import SkeletonBlogItemPostPage from '@/components/pages/BlogItemPage/SkeletonBlogItemPostPage';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { RichText } from '@/components/RichText/RichText';
-import getQueryOptionsClient from '@/components/pages/BlogItemPage/getQueryOptionsClient';
 import { useStaticPageData } from '@/hooks/useStaticPageData';
+import { Key, keyGetter } from '@/lib/keyGetter';
 
 interface Props {
   slug: string;
 }
 
 export const BlogItemPrePage: ParentComponent<Props> = ({slug, children}) => {
-  const { data: article, isLoading, isFetching} = useStaticPageData(['blog', slug]);
+  const { data: article, isLoading, isFetching} = useStaticPageData(keyGetter[Key.BLOG_ITEM](slug));
 
   if (!article && (isLoading || isFetching)) {
     return (
       <SkeletonBlogItemPrePage>
         <SkeletonBlogItemPostPage />
+        {children}
       </SkeletonBlogItemPrePage>
     );
   }
 
   if (!article) {
-    return <></>
+    return children;
   }
+
 
   const articleAttributes = article.attributes || {};
   const coverAttributes = articleAttributes.thumbnail?.data?.attributes || {};

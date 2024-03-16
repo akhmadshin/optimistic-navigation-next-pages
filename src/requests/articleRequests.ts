@@ -41,36 +41,3 @@ export async function fetchArticleDirectly(slug: string) {
   const options = { headers: { Authorization: `Bearer ${token}` } };
   return fetchAPI(path, urlParamsObject, options).then((article) => article.data[0]).catch((e) => console.log(e));
 }
-
-
-export const fetchArticlesDirectly = async () => {
-  const pageNumber = 0;
-  const limitNumber = 10;
-  const token = process.env.STRAPI_API_TOKEN;
-  const path = `/articles`;
-
-  const urlParamsObject = {
-    sort: { createdAt: "desc" },
-    populate: {
-      thumbnail: {
-        'url': true,
-        'hash': true,
-        'ext': true,
-        'height': true,
-        'width': true,
-        'thumbhash': true,
-        'alternativeText': true,
-        'formats': true,
-      },
-    },
-    pagination: {
-      start: pageNumber * limitNumber,
-      limit: limitNumber,
-    },
-  };
-  const options = { headers: { Authorization: `Bearer ${token}` } };
-  const posts = await fetchAPI(path, urlParamsObject, options);
-
-  return posts;
-}
-

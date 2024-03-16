@@ -2,9 +2,10 @@ import React from 'react';
 
 import { ArticleCard } from '@/components/ArticleCard';
 import { useStaticPageData } from '@/hooks/useStaticPageData';
+import { Key, keyGetter } from '@/lib/keyGetter';
 
 export const HomePostPage = ({children}: any) => {
-  const {data: articles  } = useStaticPageData(['/']);
+  const {data: articles  } = useStaticPageData(keyGetter[Key.HOME]());
 
   if (!articles || !articles?.data) {
     return;

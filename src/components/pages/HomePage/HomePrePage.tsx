@@ -1,12 +1,11 @@
 import React, { PropsWithChildren } from 'react';
 import { Container } from '@/components/Container';
-import { useQuery } from '@tanstack/react-query';
-import { getQueryOptions } from '@/components/pages/HomePage/getQueryOptions';
 import { Meta } from '@/components/Meta';
 import { useStaticPageData } from '@/hooks/useStaticPageData';
+import { Key, keyGetter } from '@/lib/keyGetter';
 
 export const HomePrePage: React.FC<PropsWithChildren> = ({children}) => {
-  useStaticPageData(['/']);
+  useStaticPageData(keyGetter[Key.HOME]());
 
   return (
     <Container>

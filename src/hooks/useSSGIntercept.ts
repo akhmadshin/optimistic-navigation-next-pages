@@ -6,7 +6,6 @@ export const useSSGIntercept = () => {
   useEffect(() => {
 
     if (!PageRouter.router?.components) return;
-    console.log('PageRouter.router?.components = ', PageRouter.router?.components);
 
     const pageLoader = PageRouter.router.pageLoader;
     if (!pageLoader) return;
@@ -17,16 +16,10 @@ export const useSSGIntercept = () => {
 
     const {loadPage: originalLoadPage} = pageLoader;
     pageLoader.loadPage = (...args) => {
-      console.log('args = ', args);
-      console.log('pageLoader = ', pageLoader);
       return (
         originalLoadPage
           .apply(pageLoader, args)
           .then((pageCache) => {
-
-
-
-            console.log('pageCache = ', pageCache);
             return ({
               ...pageCache,
               mod: {

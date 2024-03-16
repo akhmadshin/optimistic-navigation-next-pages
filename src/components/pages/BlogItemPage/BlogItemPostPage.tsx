@@ -3,13 +3,14 @@ import SkeletonBlogItemPostPage from '@/components/pages/BlogItemPage/SkeletonBl
 import React from 'react';
 import { RichText } from '@/components/RichText';
 import { useStaticPageData } from '@/hooks/useStaticPageData';
+import { Key, keyGetter } from '@/lib/keyGetter';
 
 interface Props {
   slug: string;
 }
 
 export const BlogItemPostPage: Component<Props> = ({slug}) => {
-  const { data: article, isLoading, isFetching} = useStaticPageData(['blog', slug]);
+  const { data: article, isLoading, isFetching} = useStaticPageData(keyGetter[Key.BLOG_ITEM](slug));
 
   if (isLoading || isFetching) {
     return <SkeletonBlogItemPostPage/>
