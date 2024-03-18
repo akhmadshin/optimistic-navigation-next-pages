@@ -21,16 +21,10 @@ export async function getStaticPaths() {
 
   const urlParamsObject = {
     sort: { createdAt: "desc" },
+    fields: ['title', 'description', 'slug', 'content'],
     populate: {
       thumbnail: {
-        'url': true,
-        'hash': true,
-        'ext': true,
-        'height': true,
-        'width': true,
-        'thumbhash': true,
-        'alternativeText': true,
-        'formats': true,
+        fields: ['thumbhash', 'name', 'slug', 'alternativeText', 'height', 'width'],
       },
     },
     pagination: {
@@ -69,20 +63,11 @@ export const getStaticProps: GetServerSideProps<{ dehydratedState: any }> = asyn
         filters: {
           slug: slug,
         },
+        fields: ['title', 'description', 'slug', 'content'],
         populate: {
           thumbnail: {
-            'url': true,
-            'hash': true,
-            'ext': true,
-            'height': true,
-            'width': true,
-            'thumbhash': true,
-            'alternativeText': true,
-            'formats': true,
+            fields: ['thumbhash', 'name', 'slug', 'alternativeText', 'height', 'width'],
           },
-          authorsBio: { populate: '*' },
-          category: { fields: ['slug', 'name'] },
-          blocks: { populate: '*' },
         },
       };
       const options = { headers: { Authorization: `Bearer ${token}` } };

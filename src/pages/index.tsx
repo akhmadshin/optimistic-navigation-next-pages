@@ -15,16 +15,10 @@ export const getStaticProps = async () => {
 
       const urlParamsObject = {
         sort: { createdAt: "desc" },
+        fields: ['title', 'description', 'slug'],
         populate: {
           thumbnail: {
-            'url': true,
-            'hash': true,
-            'ext': true,
-            'height': true,
-            'width': true,
-            'thumbhash': true,
-            'alternativeText': true,
-            'formats': true,
+            fields: ['thumbhash', 'name', 'slug', 'alternativeText', 'height', 'width'],
           },
         },
         pagination: {
