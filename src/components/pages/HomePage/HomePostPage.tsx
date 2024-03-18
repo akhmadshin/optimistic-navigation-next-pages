@@ -1,11 +1,10 @@
 import React from 'react';
 
 import { ArticleCard } from '@/components/ArticleCard';
-import { useStaticPageData } from '@/hooks/useStaticPageData';
-import { Key, keyGetter } from '@/lib/keyGetter';
+import { usePageData } from '@/hooks/usePageData';
 
-export const HomePostPage = ({children}: any) => {
-  const {data: articles  } = useStaticPageData(keyGetter[Key.HOME]());
+export const HomePostPage = () => {
+  const {data: articles  } = usePageData();
 
   if (!articles || !articles?.data) {
     return;

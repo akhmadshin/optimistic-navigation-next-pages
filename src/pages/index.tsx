@@ -1,12 +1,12 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { HomePage } from '@/components/pages/HomePage';
-import { Key, keyGetter } from '@/lib/keyGetter';
 import { fetchAPI } from '@/lib/fetch-api';
+import { GetStaticProps } from 'next';
 
-export const getStaticProps = async () => {
+export const getStaticProps: GetStaticProps<{ dehydratedState: any }> = async (props) => {
   const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
-    queryKey: keyGetter[Key.HOME](),
+    queryKey: ['/'],
     queryFn: async () => {
       const pageNumber = 0;
       const limitNumber = 10;

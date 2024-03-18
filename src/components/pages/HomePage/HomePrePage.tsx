@@ -1,13 +1,10 @@
 import React, { PropsWithChildren } from 'react';
 import { Container } from '@/components/Container';
 import { Meta } from '@/components/Meta';
-import { useStaticPageData } from '@/hooks/useStaticPageData';
-import { Key, keyGetter } from '@/lib/keyGetter';
-import { SvgTelegram } from '@/components/pages/HomePage/SvgTelegram';
-import { SvgLinkedIn } from '@/components/pages/HomePage/SvgLinkedIn';
+import { usePageData } from '@/hooks/usePageData';
 
 export const HomePrePage: React.FC<PropsWithChildren> = ({children}) => {
-  useStaticPageData(keyGetter[Key.HOME]());
+  usePageData();
 
   return (
     <Container>

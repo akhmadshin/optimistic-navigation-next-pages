@@ -4,17 +4,16 @@ import { Meta } from '@/components/Meta';
 import { SkeletonBlogItemPrePage } from '@/components/pages/BlogItemPage/SkeletonBlogItemPrePage';
 import { Image } from '@/components/Image/Image';
 import SkeletonBlogItemPostPage from '@/components/pages/BlogItemPage/SkeletonBlogItemPostPage';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { RichText } from '@/components/RichText/RichText';
-import { useStaticPageData } from '@/hooks/useStaticPageData';
-import { Key, keyGetter } from '@/lib/keyGetter';
+import { usePageData } from '@/hooks/usePageData';
 
 interface Props {
   slug: string;
 }
 
 export const BlogItemPrePage: ParentComponent<Props> = ({slug, children}) => {
-  const { data: article, isLoading, isFetching} = useStaticPageData(keyGetter[Key.BLOG_ITEM](slug));
+  const { data: article, isLoading, isFetching} = usePageData();
 
   if (!article && (isLoading || isFetching)) {
     return (

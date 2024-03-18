@@ -2,8 +2,6 @@ import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { BlogItemPage } from '@/components/pages/BlogItemPage';
 import { GetServerSideProps } from 'next';
 import { fetchAPI } from '@/lib/fetch-api';
-import { Key, keyGetter } from '@/lib/keyGetter';
-
 
 export default function Page() {
   return (
@@ -49,13 +47,11 @@ export async function getStaticPaths() {
 }
 
 
-export const getStaticProps: GetServerSideProps<{ dehydratedState: any }> = async ({params}) => {
-  const { slug } = params as { slug: string };
+export const getStaticProps: GetServerSideProps<{ dehydratedState: any }> = async (props) => {
+  const { slug } = props.params as { slug: string };
   const queryClient = new QueryClient()
-
-
   await queryClient.prefetchQuery({
-    queryKey: keyGetter[Key.BLOG_ITEM](slug),
+    queryKey: [`/blog/${slug}/`],
     queryFn: () => {
       const token = process.env.STRAPI_API_TOKEN;
       const path = `/articles/`;

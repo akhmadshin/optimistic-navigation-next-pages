@@ -2,7 +2,7 @@ import PageRouter, { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { dehydrate, useQueryClient } from '@tanstack/react-query';
 
-export const useSSGIntercept = () => {
+export const useSoftNavigationIntercept = () => {
   useEffect(() => {
 
     if (!PageRouter.router?.components) return;
@@ -25,6 +25,7 @@ export const useSSGIntercept = () => {
               mod: {
                 ...pageCache.mod,
                 __N_SSG: false,
+                __N_SSP: false,
               },
             })
           }))

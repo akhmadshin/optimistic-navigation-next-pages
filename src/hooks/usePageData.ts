@@ -2,13 +2,13 @@ import PageRouter, { useRouter } from 'next/router';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { getPlaceholderData } from '@/lib/utils';
 
-export const useStaticPageData = (queryKey: string[]) => {
+export const usePageData = () => {
   const router = useRouter();
   const client = useQueryClient();
   const placeholderData = getPlaceholderData();
 
   return useQuery<unknown, unknown, any>({
-    queryKey: router && client ? queryKey : undefined,
+    queryKey: router && client ? [router.asPath] : undefined,
     placeholderData,
     queryFn: () => {
       if (router && PageRouter?.router) {

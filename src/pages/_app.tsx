@@ -5,7 +5,7 @@ import {
 } from '@tanstack/react-query'
 import React, { Suspense, useEffect, useLayoutEffect, useState } from 'react';
 import { Header } from '@/components/Header';
-import { useSSGIntercept } from '@/hooks/useSSGIntercept';
+import { useSoftNavigationIntercept } from '@/hooks/useSoftNavigationIntercept';
 import { AppProps } from 'next/app';
 import WithQueryClientProvider from '@/components/WithQueryClientProvider';
 import { Page } from '@/components/pages/Page';
@@ -25,7 +25,7 @@ import { useRouter } from 'next/router';
 })()
 
 export default function MyApp({Component, pageProps}: AppProps) {
-  useSSGIntercept();
+  useSoftNavigationIntercept();
 
   const router = useRouter();
 
