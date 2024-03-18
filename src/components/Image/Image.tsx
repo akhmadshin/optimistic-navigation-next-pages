@@ -1,8 +1,9 @@
 import { ImageLoader, ImageLoaderProps, ImageProps } from 'next/image';
 import NextImage from 'next/image';
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPngDataUri } from '@/lib/createPngDataUri';
 import { requestIdleCallback } from '@/lib/request-idle-callback';
+import { useClientLayoutEffect } from '@/hooks/useClientLayoutEffect';
 
 type Props = ImageProps & {
   thumbhash: string;
@@ -22,8 +23,14 @@ export const Image = forwardRef<HTMLImageElement, Props>(({
 }, ref) => {
   const [blurDataURL, setBlurDataURL] = useState<string | undefined>();
 
+  const imgRef = useRef<HTMLImageElement>(null);
+
   useEffect(() => {
-    if (typeof window === 'undefined') {
+    if (typeof window === 'undefined' || !imgRef.current) {
+      return;
+    }
+    if (imgRef.current.complete) {
+      setBlurDataURL(undefined);
       return;
     }
     requestIdleCallback(() => {
@@ -43,7 +50,15 @@ export const Image = forwardRef<HTMLImageElement, Props>(({
       height={fill ? undefined : height}
       width={fill ? undefined : width}
       placeholder={blurDataURL as any}
-      ref={ref}
+      ref={(node) => {
+        // @ts-ignore
+        imgRef.current = node;
+        if (typeof ref === 'function') {
+          ref(node);
+        } else if (ref) {
+          ref.current = node;
+        }
+      }}
       {...props}
     />
   );

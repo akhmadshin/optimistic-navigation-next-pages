@@ -45,6 +45,8 @@ export const BlogItemPrePage: ParentComponent<Props> = ({slug, children}) => {
           <h1 className="leading-tight text-5xl font-bold ">{title}</h1>
           <div className="banner-img">
             <Image
+              priority
+              sizes="100vw"
               thumbhash={coverAttributes.thumbhash}
               src={`/${coverAttributes.name}`}
               alt={coverAttributes.alternativeText}

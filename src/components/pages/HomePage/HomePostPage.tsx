@@ -15,7 +15,7 @@ export const HomePostPage = ({children}: any) => {
     <div className="mt-16">
       <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-10">
         {articles.data.map((article: any, index: number) => (
-          <ArticleCard article={article} key={index}/>
+          <ArticleCard article={article} priority={index === 0} key={index}/>
         ))}
       </div>
     </div>

@@ -5,7 +5,6 @@ import { SkeletonArticleCard } from '@/components/ArticleCard/SkeletonArticleCar
 import { Image } from '@/components/Image/Image';
 import { RichText } from '@/components/RichText';
 
-
 export const ArticleCard: React.FC<any> = (props) => {
   const imageRef = useRef<HTMLImageElement>(null);
 
@@ -36,6 +35,8 @@ export const ArticleCard: React.FC<any> = (props) => {
     <article className="flex flex-col items-start justify-between card pointer-events-none">
       <div className="relative w-full">
         <Image
+          priority={props.priority}
+          sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
           ref={imageRef}
           thumbhash={coverAttributes.thumbhash}
           src={`/${coverAttributes.name}`}
