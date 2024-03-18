@@ -18,9 +18,7 @@ export function Header() {
             >
               <span className="font-bold">Home</span>
             </Link>
-
             <div className="">
-
               <div className="flex flex-row gap-3">
                 <span className="font-bold">Contacts:</span>
 
