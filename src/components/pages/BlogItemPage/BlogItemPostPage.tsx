@@ -4,11 +4,7 @@ import React from 'react';
 import { RichText } from '@/components/RichText';
 import { usePageData } from '@/hooks/usePageData';
 
-interface Props {
-  slug: string;
-}
-
-export const BlogItemPostPage: Component<Props> = () => {
+export const BlogItemPostPage: Component = () => {
   const { data: article, isLoading, isFetching} = usePageData();
 
   if (isLoading || isFetching) {

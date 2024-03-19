@@ -3,7 +3,7 @@ import '@/styles/globals.css'
 import {
   Hydrate,
 } from '@tanstack/react-query'
-import React, { Suspense, useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Header } from '@/components/Header';
 import { useSoftNavigationIntercept } from '@/hooks/useSoftNavigationIntercept';
 import { AppProps } from 'next/app';
@@ -16,10 +16,7 @@ import { useRouter } from 'next/router';
   if (typeof window === 'undefined') {
     return;
   }
-  window.navigator;
   const routeLoader = createRouteLoader('');
-
-  console.log('prefetching');
   routeLoader.prefetch('/').catch(e => console.log('error = ', e));
   routeLoader.prefetch('/blog/[slug]').catch(e => console.log('error = ', e));
 })()

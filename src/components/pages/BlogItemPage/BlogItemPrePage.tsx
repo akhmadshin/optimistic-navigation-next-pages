@@ -8,11 +8,7 @@ import React from 'react';
 import { RichText } from '@/components/RichText/RichText';
 import { usePageData } from '@/hooks/usePageData';
 
-interface Props {
-  slug: string;
-}
-
-export const BlogItemPrePage: ParentComponent<Props> = ({slug, children}) => {
+export const BlogItemPrePage: ParentComponent = ({ children}) => {
   const { data: article, isLoading, isFetching} = usePageData();
 
   if (!article && (isLoading || isFetching)) {

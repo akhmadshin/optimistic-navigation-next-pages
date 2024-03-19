@@ -16,15 +16,11 @@ export const HomePrePage: React.FC<PropsWithChildren> = ({children}) => {
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
           This web site on Next.js implements View Transitions API.
         </h1>
-
-        <p className="mt-10 prose lg:prose-xl max-w-none dark:prose-invert">
-          It takes a lot of effort to achieve what this web-site does.
-          In a nutshell.
-          No matter how slow the user’s Internet is or how weak his hardware is, site navigation should be instantaneous.
+        <p className="mt-10 line-clamp-3 text-lg text-zinc-600 dark:text-zinc-100">
+          This site looks simple but it takes a lot of effort to achieve what it does.
+          No matter how slow the user’s Internet is or how weak his hardware is, site navigation remains instantaneous.
           Click on any card bellow, to see it.
         </p>
-
-
       </div>
       {children}
     </Container>

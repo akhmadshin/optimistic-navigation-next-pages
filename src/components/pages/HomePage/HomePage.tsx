@@ -6,10 +6,10 @@ import { HomePrePage } from '@/components/pages/HomePage/HomePrePage';
 const HomePostPage = dynamic(() => import('@/components/pages/HomePage/HomePostPage')
   .then((mod) => mod.HomePostPage))
 
-export const HomePage = (props: any) => {
+export const HomePage = () => {
   return (
-    <HomePrePage {...props}>
-      <HomePostPage {...props} />
+    <HomePrePage>
+      <HomePostPage />
     </HomePrePage>
   );
 }

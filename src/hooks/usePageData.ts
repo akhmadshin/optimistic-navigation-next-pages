@@ -1,16 +1,18 @@
 import PageRouter, { useRouter } from 'next/router';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getPlaceholderData } from '@/lib/utils';
 import { formatWithValidation } from 'next/dist/shared/lib/router/utils/format-url';
-import { notFound } from 'next/navigation'
+
+function getPathFromUrl(url: string) {
+  return url.split(/[?#]/)[0];
+}
 
 export const usePageData = () => {
   const router = useRouter();
   const client = useQueryClient();
-  const placeholderData = getPlaceholderData();
+  const placeholderData = typeof window === 'undefined' ? undefined : window.placeholderData;
 
   return useQuery<unknown, unknown, any>({
-    queryKey: router && client ? [router.asPath] : undefined,
+    queryKey: router && client ? [getPathFromUrl(router.asPath)] : undefined,
     placeholderData,
     queryFn: async () => {
       if (router && PageRouter?.router) {
@@ -28,9 +30,8 @@ export const usePageData = () => {
           return state.data;
         }
         router.reload();
-        throw new Error(res.statusText)
+        throw new Error(res.statusText);
       }
     },
   });
-
 }

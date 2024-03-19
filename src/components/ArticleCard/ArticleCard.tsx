@@ -48,7 +48,7 @@ export const ArticleCard: React.FC<any> = (props) => {
       </div>
       <div className=" w-full">
         <h3
-          className="mt-3 text-2xl font-bold line-clamp-3 4xl:text-regular-18 group-hover:text-gray-600"
+          className="mt-2 text-2xl font-bold line-clamp-3 4xl:text-regular-18 group-hover:text-gray-600"
         >
           <Link
             beforeTransition={handleBeforeTransition}
@@ -61,7 +61,7 @@ export const ArticleCard: React.FC<any> = (props) => {
             {articleAttributes.title}
           </Link>
         </h3>
-        <div className="relative z-10 mt-5 line-clamp-3 text-sm leading-6 text-zinc-600 dark:text-zinc-400">
+        <div className="relative z-10 mt-3 line-clamp-3 text-sm leading-6 text-zinc-600 dark:text-zinc-200">
           <RichText content={articleAttributes.description} />
         </div>
       </div>
