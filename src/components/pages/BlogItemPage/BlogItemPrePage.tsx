@@ -1,10 +1,9 @@
+import React from 'react';
 import { ParentComponent } from '@/types/general';
 import { Container } from '@/components/Container';
 import { Meta } from '@/components/Meta';
-import { SkeletonBlogItemPrePage } from '@/components/pages/BlogItemPage/SkeletonBlogItemPrePage';
+import { SkeletonBlogItemPrePage } from './SkeletonBlogItemPrePage';
 import { Image } from '@/components/Image/Image';
-import SkeletonBlogItemPostPage from '@/components/pages/BlogItemPage/SkeletonBlogItemPostPage';
-import React from 'react';
 import { RichText } from '@/components/RichText/RichText';
 import { usePageData } from '@/hooks/usePageData';
 
@@ -14,7 +13,6 @@ export const BlogItemPrePage: ParentComponent = ({ children}) => {
   if (!article && (isLoading || isFetching)) {
     return (
       <SkeletonBlogItemPrePage>
-        <SkeletonBlogItemPostPage />
         {children}
       </SkeletonBlogItemPrePage>
     );

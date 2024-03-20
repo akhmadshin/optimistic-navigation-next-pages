@@ -1,8 +1,8 @@
 import { SkeletonText } from '@/components/skeletons/SkeletonText';
+import { Component } from '@/types/general';
 
-export default function SkeletonBlogItemPostPage() {
+export const SkeletonBlogItemPostPage: Component = () => {
   return (
-
     <div className="mt-10">
       <div className="prose lg:prose-xl max-w-none dark:prose-invert flex flex-col">
         <SkeletonText width="65%" as={'h2'} />
