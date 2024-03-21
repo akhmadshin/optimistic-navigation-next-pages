@@ -2,9 +2,16 @@ import React from 'react';
 
 import { ArticleCard } from '@/components/ArticleCard';
 import { usePageData } from '@/hooks/usePageData';
+import { SkeletonHomePostPage } from '@/components/pages/HomePage/SkeletonHomePostPage';
 
 export const HomePostPage = () => {
-  const {data: articles  } = usePageData();
+  const { data: articles, isLoading, isFetching} = usePageData();
+
+  if (!articles && (isLoading || isFetching)) {
+    return (
+      <SkeletonHomePostPage />
+    );
+  }
 
   if (!articles || !articles?.data) {
     return;
