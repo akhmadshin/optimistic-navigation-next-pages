@@ -3,7 +3,7 @@ import { Container } from '@/components/Container';
 import { SkeletonText } from '@/components/skeletons/SkeletonText';
 import { SkeletonImage } from '@/components/skeletons/SkeletonImage';
 import { SkeletonDescription } from '@/components/skeletons/SkeletonDescription';
-import { SkeletonBlogItemPostPage } from '@/components/pages/BlogItemPage/SkeletonBlogItemPostPage';
+import { SkeletonBlogItemPostPage } from '@/routes/BlogItemPage/SkeletonBlogItemPostPage';
 
 export const SkeletonBlogItemPrePage: ParentComponent = ({ children }) => {
   return (

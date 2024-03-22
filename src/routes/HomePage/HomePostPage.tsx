@@ -2,7 +2,7 @@ import React from 'react';
 
 import { ArticleCard } from '@/components/ArticleCard';
 import { usePageData } from '@/hooks/usePageData';
-import { SkeletonHomePostPage } from '@/components/pages/HomePage/SkeletonHomePostPage';
+import { SkeletonHomePostPage } from '@/routes/HomePage/SkeletonHomePostPage';
 
 export const HomePostPage = () => {
   const { data: articles, isLoading, isFetching} = usePageData();

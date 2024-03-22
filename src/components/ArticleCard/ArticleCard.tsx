@@ -2,36 +2,20 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { Link } from '@/components/Link';
 import { SkeletonArticleCard } from '@/components/ArticleCard/SkeletonArticleCard';
-import { generateImgSrc, Image } from '@/components/Image/Image';
+import { Image } from '@/components/Image/Image';
 import { RichText } from '@/components/RichText';
-import { ImageProps } from 'next/image';
-import { ImgProps } from 'next/dist/shared/lib/get-img-props';
 
 export const ArticleCard: React.FC<any> = (props) => {
   const imageRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const [prefetchImgAttributes, setPrefetchImgAttributes] = useState<ImgProps>()
+  const [prefetchSizes, setPrefetchSizes] = useState<string>('')
   useEffect(() => {
     if (!containerRef.current) {
       return;
     }
     containerRef.current.addEventListener("mouseenter", (e) => {
-
-      const imgAttr: ImgProps = {
-        style: {},
-        srcSet: generateImgSrc({
-          width: window.innerWidth,
-          src: `/${coverAttributes.name}`,
-          sizes: '100vw',
-        }) as string,
-        src: `/${coverAttributes.name}`,
-        sizes: '100vw',
-        loading: 'lazy',
-        width: coverAttributes.width,
-        height: coverAttributes.height,
-      };
-      setPrefetchImgAttributes(imgAttr);
+      setPrefetchSizes('100vw');
       console.log("mouseOver");
     }, { once: true });
   }, [containerRef])
@@ -58,12 +42,6 @@ export const ArticleCard: React.FC<any> = (props) => {
       imageRef.current.style.viewTransitionName = '';
     }
   }
-  const getDeviceSizeBySizesString = (sizes: string = '(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw') => {
-    const size = sizes.split(', ')
-  }
-
-
-
 
   return (
     <div ref={containerRef}>
@@ -78,7 +56,7 @@ export const ArticleCard: React.FC<any> = (props) => {
             alt={coverAttributes.alternativeText}
             width={coverAttributes.width}
             height={coverAttributes.height}
-            prefetchImgAttributes={prefetchImgAttributes}
+            prefetchSizes={prefetchSizes}
           />
           <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"/>
         </div>

@@ -1,5 +1,5 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
-import { BlogItemPage } from '@/components/pages/BlogItemPage';
+import { BlogItemPage } from '@/routes/BlogItemPage';
 import { GetStaticProps } from 'next';
 import { fetchAPI } from '@/lib/fetch-api';
 

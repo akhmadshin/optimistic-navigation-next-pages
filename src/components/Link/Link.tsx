@@ -14,10 +14,6 @@ export type LinkPropsModified = LinkPropsReal & {
   afterTransition?: () => void;
 }
 
-type Props = LinkPropsReal & {
-  data?: any;
-}
-
 export const Link = React.forwardRef<HTMLAnchorElement, LinkPropsModified>(function LinkComponent(props, forwardedRef) {
   const {
     data,
@@ -34,11 +30,8 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkPropsModified>(funct
   const isAbsoluteUrlOrAnchorUrl = typeof href === 'string' && (/^http/.test(href) || /^#/.test(href));
   const isSameUrl = currentUrl === href;
 
-
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    if (beforeTransition && !isSameUrl) {
-      beforeTransition()
-    }
+
     if (onClick) {
       onClick(e);
     }
@@ -70,6 +63,10 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkPropsModified>(funct
   }
 
   const startPageTransition = () => {
+    if (beforeTransition) {
+      beforeTransition()
+    }
+
     if (!window.pageMounted) {
       window.pageMountedPromise = new Promise(resolve => {
         window.pageMounted = resolve as any;
@@ -87,6 +84,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkPropsModified>(funct
       },
     });
   }
+
   return (
     <NextLink
       onClick={handleClick}

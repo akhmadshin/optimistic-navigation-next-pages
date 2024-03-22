@@ -1,5 +1,5 @@
 import { dehydrate, QueryClient } from '@tanstack/react-query'
-import { HomePage } from '@/components/pages/HomePage';
+import { HomePage } from '@/routes/HomePage';
 import { fetchAPI } from '@/lib/fetch-api';
 import { GetStaticProps } from 'next';
 

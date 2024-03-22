@@ -1,11 +1,11 @@
 import { Component, ParentComponent } from '@/types/general';
-import { BlogItemPrePage } from '@/components/pages/BlogItemPage/BlogItemPrePage';
+import { BlogItemPrePage } from '@/routes/BlogItemPage/BlogItemPrePage';
 import dynamic from 'next/dynamic';
 import { PageRenderer } from '@/components/PageRenderer/PageRenderer';
-import { SkeletonBlogItemPostPage } from '@/components/pages/BlogItemPage/SkeletonBlogItemPostPage';
+import { SkeletonBlogItemPostPage } from '@/routes/BlogItemPage/SkeletonBlogItemPostPage';
 
 const BlogItemPostPage = dynamic<Component>(() =>
-  import('@/components/pages/BlogItemPage/BlogItemPostPage')
+  import('@/routes/BlogItemPage/BlogItemPostPage')
   .then((mod) => mod.BlogItemPostPage), {
   loading: () => <SkeletonBlogItemPostPage />
 })

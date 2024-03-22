@@ -8,7 +8,7 @@ import { Header } from '@/components/Header';
 import { useSoftNavigationIntercept } from '@/hooks/useSoftNavigationIntercept';
 import { AppProps } from 'next/app';
 import WithQueryClientProvider from '@/components/WithQueryClientProvider';
-import { Page } from '@/components/pages/Page';
+import { Page } from '@/components/Page';
 import { createRouteLoader } from '@/lib/route-loader';
 import { useRouter } from 'next/router';
 

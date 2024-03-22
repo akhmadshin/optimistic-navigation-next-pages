@@ -1,11 +1,11 @@
 import React from 'react';
 import dynamic from 'next/dynamic';
 
-import { HomePrePage } from '@/components/pages/HomePage/HomePrePage';
+import { HomePrePage } from '@/routes/HomePage/HomePrePage';
 import { PageRenderer } from '@/components/PageRenderer/PageRenderer';
-import { SkeletonHomePostPage } from '@/components/pages/HomePage/SkeletonHomePostPage';
+import { SkeletonHomePostPage } from '@/routes/HomePage/SkeletonHomePostPage';
 
-const HomePostPage = dynamic(() => import('@/components/pages/HomePage/HomePostPage')
+const HomePostPage = dynamic(() => import('@/routes/HomePage/HomePostPage')
   .then((mod) => mod.HomePostPage), {
   loading: () => <SkeletonHomePostPage />
 })

@@ -1,9 +1,10 @@
+import React from 'react';
+
 import { Link } from '@/components/Link';
 import { Container } from '@/components/Container';
-import { SvgLinkedIn } from '@/components/pages/HomePage/SvgLinkedIn';
-import { SvgTelegram } from '@/components/pages/HomePage/SvgTelegram';
-import React from 'react';
-import { SvgGithub } from '@/components/pages/HomePage/SvgGithub';
+import { SvgLinkedIn } from '@/components/svg/SvgLinkedIn';
+import { SvgTelegram } from '@/components/svg/SvgTelegram';
+import { SvgGithub } from '@/components/svg/SvgGithub';
 
 export function Header() {
   return (
