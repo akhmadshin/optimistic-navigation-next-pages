@@ -31,14 +31,13 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkPropsModified>(funct
   const isSameUrl = currentUrl === href;
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
-
     if (onClick) {
       onClick(e);
     }
     if (isAbsoluteUrlOrAnchorUrl || e.metaKey) {
       return;
     }
-    handleLocalRouteNavigation(data);
+    handleLocalRouteNavigation();
   }
 
   const handleKeyPress = (e: KeyboardEvent<HTMLAnchorElement>) => {
@@ -48,15 +47,12 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkPropsModified>(funct
     if (isAbsoluteUrlOrAnchorUrl || e.metaKey) {
       return;
     }
-    handleLocalRouteNavigation(data);
+    handleLocalRouteNavigation();
   }
 
-  const handleLocalRouteNavigation = (data: any) => {
+  const handleLocalRouteNavigation = () => {
     if (isSameUrl) {
       return;
-    }
-    if (data) {
-      window.placeholderData = data;
     }
 
     startPageTransition();

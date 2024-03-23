@@ -1,31 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import { Link } from '@/components/Link';
-import { SkeletonArticleCard } from '@/components/ArticleCard/SkeletonArticleCard';
 import { Image } from '@/components/Image/Image';
 import { RichText } from '@/components/RichText';
+import { ArticleListItem } from '@/types/api';
 
-export const ArticleCard: React.FC<any> = (props) => {
+interface Props {
+  article: ArticleListItem;
+  priority: boolean;
+}
+export const ArticleCard: React.FC<Props> = (props) => {
   const imageRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-
-  const [prefetchSizes, setPrefetchSizes] = useState<string>('')
-  useEffect(() => {
-    if (!containerRef.current) {
-      return;
-    }
-    containerRef.current.addEventListener("mouseenter", (e) => {
-      setPrefetchSizes('100vw');
-      console.log("mouseOver");
-    }, { once: true });
-  }, [containerRef])
-
-  const handleClick = () => {
-  }
-
-  if (!props.article) {
-    return <SkeletonArticleCard/>
-  }
 
   const articleAttributes = props.article.attributes;
   const coverAttributes = articleAttributes.thumbnail.data?.attributes;
@@ -53,10 +39,9 @@ export const ArticleCard: React.FC<any> = (props) => {
             ref={imageRef}
             thumbhash={coverAttributes.thumbhash}
             src={`/${coverAttributes.name}`}
-            alt={coverAttributes.alternativeText}
+            alt={coverAttributes.alternativeText || ''}
             width={coverAttributes.width}
             height={coverAttributes.height}
-            prefetchSizes={prefetchSizes}
           />
           <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"/>
         </div>
@@ -68,7 +53,6 @@ export const ArticleCard: React.FC<any> = (props) => {
               beforeTransition={handleBeforeTransition}
               afterTransition={handleAfterTransition}
               href={`/blog/${articleAttributes.slug}/`}
-              onClick={handleClick}
               data={props.article}
               className={'pointer-events-auto card-link'}
             >

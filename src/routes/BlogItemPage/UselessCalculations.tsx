@@ -1,12 +1,6 @@
-import { Component } from '@/types/general';
-import { SkeletonBlogItemPostPage } from '@/routes/BlogItemPage/SkeletonBlogItemPostPage';
 import React, { useEffect, useMemo, useState } from 'react';
-import { RichText } from '@/components/RichText';
-import { usePageData } from '@/hooks/usePageData';
 
-export const BlogItemPostPage: Component = () => {
-  const { data: article, isLoading, isFetching} = usePageData();
-
+export const UselessCalculations = () => {
   const iterations = 50;
   const multiplier = 1000000000;
 
@@ -43,23 +37,12 @@ export const BlogItemPostPage: Component = () => {
     setIsClient(true)
   }, [])
 
-  if (isLoading || isFetching) {
-    return <SkeletonBlogItemPostPage/>
-  }
-
-  const articleAttributes = article.attributes;
-  const { content } = articleAttributes;
-
   return (
-    <div className="mt-10">
-      <div className="prose lg:prose-xl max-w-none dark:prose-invert">
-        <p>Calculating random numbers to simulate heavy app</p>
-        <div>
-          {primes.join(' ')}
-        </div>
-        <RichText content={content} />
+    <div>
+      <p>Calculating random numbers to simulate heavy app</p>
+      <div>
+        {primes.join(' ')}
       </div>
     </div>
-
-  );
+  )
 }

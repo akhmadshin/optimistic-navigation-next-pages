@@ -1,47 +1,46 @@
-import { dehydrate, QueryClient } from '@tanstack/react-query'
 import { HomePage } from '@/routes/HomePage';
 import { fetchAPI } from '@/lib/fetch-api';
-import { GetStaticProps } from 'next';
+import { GetStaticProps, InferGetServerSidePropsType } from 'next';
+import { timeout } from '@/lib/api-helpers';
+import { ArticleList } from '@/types/api';
 
-export const getStaticProps: GetStaticProps<{ dehydratedState: any }> = async (props) => {
-  const queryClient = new QueryClient();
-  await queryClient.prefetchQuery({
-    queryKey: ['/'],
-    queryFn: async () => {
-      const pageNumber = 0;
-      const limitNumber = 10;
-      const token = process.env.STRAPI_API_TOKEN;
-      const path = `/articles`;
+export const getServerSideProps: GetStaticProps<{ articles: ArticleList }> = async (props) => {
+  const pageNumber = 0;
+  const limitNumber = 10;
+  const token = process.env.STRAPI_API_TOKEN;
+  const path = `/articles`;
 
-      const urlParamsObject = {
-        sort: { createdAt: "desc" },
-        fields: ['title', 'description', 'slug'],
-        populate: {
-          thumbnail: {
-            fields: ['thumbhash', 'name', 'slug', 'alternativeText', 'height', 'width'],
-          },
-        },
-        pagination: {
-          start: pageNumber * limitNumber,
-          limit: limitNumber,
-        },
-      };
-      const options = { headers: { Authorization: `Bearer ${token}` } };
-      const posts = await fetchAPI(path, urlParamsObject, options);
+  // Imitate slow api
+  await timeout(1000);
 
-      return posts;
+  const urlParamsObject = {
+    sort: { createdAt: "desc" },
+    fields: ['title', 'description', 'slug'],
+    populate: {
+      thumbnail: {
+        fields: ['thumbhash', 'name', 'slug', 'alternativeText', 'height', 'width'],
+      },
     },
-  });
+    pagination: {
+      start: pageNumber * limitNumber,
+      limit: limitNumber,
+    },
+  };
+  const options = { headers: { Authorization: `Bearer ${token}` } };
+  const articles = await fetchAPI(path, urlParamsObject, options);
+
 
   return {
     props: {
-      dehydratedState: dehydrate(queryClient),
+      articles,
     },
   }
 }
 
-export default function Page() {
+type HomePageProps = InferGetServerSidePropsType<typeof getServerSideProps>;
+
+export default function Page({ articles }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   return (
-    <HomePage />
+    <HomePage articles={articles} />
   )
 }
