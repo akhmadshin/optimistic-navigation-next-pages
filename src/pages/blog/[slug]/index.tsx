@@ -1,10 +1,10 @@
 import { dehydrate, DehydratedState, QueryClient } from '@tanstack/react-query'
 import { BlogItemPage } from '@/routes/BlogItemPage';
 import { GetStaticProps } from 'next';
-import { fetchAPI } from '@/lib/fetch-api';
-import { ArticleItem, ArticleList } from '@/types/api';
+import { ArticleItem } from '@/types/api';
 import { timeout } from '@/lib/api-helpers';
 import { promises as fs } from 'fs';
+import { latency } from '@/contants/server';
 
 export type BlogItemPageProps = ArticleItem;
 
@@ -22,7 +22,7 @@ export const getServerSideProps: GetStaticProps<{ dehydratedState: DehydratedSta
     queryKey: [`/blog/${slug}/`],
     queryFn: async () => {
       // Imitate slow api
-      await timeout(600);
+      await timeout(latency);
 
       // const token = process.env.STRAPI_API_TOKEN;
       // const path = `/articles/`;

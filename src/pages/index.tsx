@@ -1,10 +1,10 @@
 import { promises as fs } from 'fs';
 import { dehydrate, DehydratedState, QueryClient } from '@tanstack/react-query'
 import { HomePage } from '@/routes/HomePage';
-import { fetchAPI } from '@/lib/fetch-api';
-import { GetServerSideProps, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import { timeout } from '@/lib/api-helpers';
 import { ArticleList } from '@/types/api';
+import { latency } from '@/contants/server';
 
 export type HomePageProps = ArticleList;
 
@@ -14,7 +14,7 @@ export const getServerSideProps: GetServerSideProps<{ dehydratedState: Dehydrate
     queryKey: ['/'],
     queryFn: async () => {
       // Imitate slow api
-      await timeout(600);
+      await timeout(latency);
 
       // const pageNumber = 0;
       // const limitNumber = 10;

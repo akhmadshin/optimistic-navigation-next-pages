@@ -2,8 +2,8 @@ import NextLink, { LinkProps } from 'next/link';
 import React, { KeyboardEvent, MouseEvent } from 'react';
 
 import { onActionKeyPress } from '@/lib/navigation-utils';
-import { useUrl } from '@/hooks/useUrl';
 import { transitionHelper } from '@/lib/transition-utils';
+import { getUrl } from '@/lib/getUrl';
 
 type LinkPropsReal = React.PropsWithChildren<Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> &
   LinkProps>
@@ -25,12 +25,13 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkPropsModified>(funct
     afterTransition,
     ...restProps
   } = props;
-  const currentUrl = useUrl();
-
+  let currentUrl = getUrl();
   const isAbsoluteUrlOrAnchorUrl = typeof href === 'string' && (/^http/.test(href) || /^#/.test(href));
   const isSameUrl = currentUrl === href;
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    currentUrl = getUrl();
+
     if (onClick) {
       onClick(e);
     }
