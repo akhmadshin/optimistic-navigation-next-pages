@@ -18,6 +18,6 @@ export const SkeletonImage: Component<Props> = (
     animationDelay: '150ms',
   }
   return (
-    <div className="aspect-[16/9] w-full rounded-2xl bg-gray-100 dark:bg-zinc-400 object-cover pointer-events-none animate-pulse"></div>
+    <div className="aspect-[4/3] lg:aspect-[16/9] w-full rounded-2xl bg-gray-100 dark:bg-zinc-400 object-cover pointer-events-none animate-pulse"></div>
   );
 };
