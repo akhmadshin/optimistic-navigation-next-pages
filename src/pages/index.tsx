@@ -3,12 +3,13 @@ import { HomePage } from '@/routes/HomePage';
 import { GetServerSideProps } from 'next';
 import { timeout } from '@/lib/api-helpers';
 import { ArticleList } from '@/types/api';
+import { latency } from '@/contants/server';
 
 export type HomePageProps = ArticleList;
 
 export const getServerSideProps: GetServerSideProps = async (props) => {
   // Imitate slow api
-  await timeout(600);
+  await timeout(latency);
 
   // const pageNumber = 0;
   // const limitNumber = 10;

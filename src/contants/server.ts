@@ -1,0 +1,1 @@
+export const latency = 600;
