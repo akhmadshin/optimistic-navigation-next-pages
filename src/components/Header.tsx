@@ -33,12 +33,6 @@ export function Header() {
               </a>
             </div>
           </div>
-          <Link
-            href="/blog/lorem-ipsum22/"
-            aria-label="Lorem ipsum"
-          >
-            <span className="font-bold">Lorem ipsum</span>
-          </Link>
         </div>
       </Container>
     </header>
