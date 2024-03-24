@@ -26,7 +26,6 @@ export const BlogItemPage: Component<BlogItemPageProps> = ({  attributes }) => {
             <Image
               priority
               sizes="100vw"
-              thumbhash={coverAttributes.thumbhash}
               src={`/${coverAttributes.name}`}
               alt={coverAttributes.alternativeText}
               width={coverAttributes.width}

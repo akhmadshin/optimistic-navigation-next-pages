@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
 import { Link } from '@/components/Link';
 import { Image } from '@/components/Image/Image';
@@ -14,24 +14,8 @@ export const ArticleCard: React.FC<Props> = ({ article, priority }) => {
   const imageRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleClick = () => {
-  }
-
   const articleAttributes = article.attributes;
   const coverAttributes = articleAttributes.thumbnail.data?.attributes;
-
-  const handleBeforeTransition = () => {
-    if (imageRef.current) {
-      // @ts-ignore
-      imageRef.current.style.viewTransitionName = 'banner-img'
-    }
-  };
-  const handleAfterTransition = () => {
-    if (imageRef.current) {
-      // @ts-ignore
-      imageRef.current.style.viewTransitionName = '';
-    }
-  }
 
   return (
     <div ref={containerRef}>
@@ -41,7 +25,6 @@ export const ArticleCard: React.FC<Props> = ({ article, priority }) => {
             priority={priority}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
             ref={imageRef}
-            thumbhash={coverAttributes.thumbhash}
             src={`/${coverAttributes.name}`}
             alt={coverAttributes.alternativeText}
             width={coverAttributes.width}
@@ -54,11 +37,7 @@ export const ArticleCard: React.FC<Props> = ({ article, priority }) => {
             className="mt-2 text-2xl font-bold line-clamp-3 4xl:text-regular-18 group-hover:text-gray-600"
           >
             <Link
-              beforeTransition={handleBeforeTransition}
-              afterTransition={handleAfterTransition}
               href={`/blog/${articleAttributes.slug}/`}
-              onClick={handleClick}
-              data={article}
               className={'pointer-events-auto card-link'}
             >
               {articleAttributes.title}

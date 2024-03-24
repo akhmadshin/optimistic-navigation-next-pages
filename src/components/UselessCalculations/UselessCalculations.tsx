@@ -4,8 +4,6 @@ export const UselessCalculations = () => {
   const iterations = 50;
   const multiplier = 1000000000;
 
-
-
   const [isClient, setIsClient] = useState(false)
 
   const primes = useMemo(() => {
