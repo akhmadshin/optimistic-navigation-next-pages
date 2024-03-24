@@ -11,7 +11,6 @@ export function createPngDataUri(hash?: string) {
 function base64ToBytes(value: string) {
 	const base64 = value.replace(/-/g, '+').replace(/_/g, '/')
 
-	// @ts-ignore
 	const decodedData = typeof Buffer !== 'undefined' ? Buffer.from(base64, 'base64')
 		: Uint8Array.from(atob(base64), char => char.charCodeAt(0))
 
@@ -72,7 +71,6 @@ function rgbaToDataUri(
 		bytes[end++] = c & 255
 	}
 
-	// @ts-ignore
 	const base64 = typeof Buffer !== 'undefined' ? Buffer.from(new Uint8Array(bytes)).toString('base64')
 		: btoa(String.fromCharCode(...bytes))
 

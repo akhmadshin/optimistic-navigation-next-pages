@@ -1,17 +1,12 @@
 import React from 'react';
+
+import { Component } from '@/types/general';
+import { HomePageProps } from '@/pages';
 import { Container } from '@/components/Container';
 import { Meta } from '@/components/Meta';
 import { ArticleCard } from '@/components/ArticleCard';
-import { Component } from '@/types/general';
-import { ArticleList } from '@/types/api';
 
-interface Props {
-  articles: ArticleList
-}
-export const HomePage: Component<Props> = ({ articles }) => {
-  if (!articles) {
-    return;
-  }
+export const HomePage: Component<HomePageProps> = ({ data: articles }) => {
   return (
     <Container>
       <Meta
@@ -30,7 +25,7 @@ export const HomePage: Component<Props> = ({ articles }) => {
       </div>
       <div className="mt-16">
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-12">
-          {articles.data.map((article, index: number) => (
+          {articles.map((article, index: number) => (
             <ArticleCard article={article} priority={index === 0} key={index}/>
           ))}
         </div>

@@ -9,7 +9,7 @@ type LinkPropsReal = React.PropsWithChildren<Omit<React.AnchorHTMLAttributes<HTM
   LinkProps>
 
 export type LinkPropsModified = LinkPropsReal & {
-  data?: any;
+  data?: object;
   beforeTransition?: () => void;
   afterTransition?: () => void;
 }

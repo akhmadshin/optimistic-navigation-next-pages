@@ -1,5 +1,4 @@
 import type { ComponentType } from 'react'
-import { requestIdleCallback } from './request-idle-callback'
 import { MiddlewareMatcher } from 'next/dist/build/analysis/get-page-static-info';
 import getAssetPathFromRoute from 'next/dist/shared/lib/router/utils/get-asset-path-from-route';
 import { __unsafeCreateTrustedScriptURL } from 'next/dist/client/trusted-types';

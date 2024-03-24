@@ -9,11 +9,15 @@ interface Props {
   article: ArticleListItem;
   priority: boolean;
 }
-export const ArticleCard: React.FC<Props> = (props) => {
+
+export const ArticleCard: React.FC<Props> = ({ article, priority }) => {
   const imageRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const articleAttributes = props.article.attributes;
+  const handleClick = () => {
+  }
+
+  const articleAttributes = article.attributes;
   const coverAttributes = articleAttributes.thumbnail.data?.attributes;
 
   const handleBeforeTransition = () => {
@@ -34,12 +38,12 @@ export const ArticleCard: React.FC<Props> = (props) => {
       <article className="flex flex-col items-start justify-between card pointer-events-none">
         <div className="relative w-full">
           <Image
-            priority={props.priority}
+            priority={priority}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
             ref={imageRef}
             thumbhash={coverAttributes.thumbhash}
             src={`/${coverAttributes.name}`}
-            alt={coverAttributes.alternativeText || ''}
+            alt={coverAttributes.alternativeText}
             width={coverAttributes.width}
             height={coverAttributes.height}
           />
@@ -53,7 +57,8 @@ export const ArticleCard: React.FC<Props> = (props) => {
               beforeTransition={handleBeforeTransition}
               afterTransition={handleAfterTransition}
               href={`/blog/${articleAttributes.slug}/`}
-              data={props.article}
+              onClick={handleClick}
+              data={article}
               className={'pointer-events-auto card-link'}
             >
               {articleAttributes.title}

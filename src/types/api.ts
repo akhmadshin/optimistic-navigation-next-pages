@@ -15,7 +15,7 @@ export interface APIResponseCollectionMetadata {
 
 export interface APIResponse<T> {
   id: number;
-  data: T;
+  attributes: T;
 }
 
 export interface APIResponseCollection<T> {
@@ -23,7 +23,7 @@ export interface APIResponseCollection<T> {
   meta: APIResponseCollectionMetadata;
 }
 
-interface ArticleItemAttributes {
+export interface ArticleItemAttributes {
   "title": string,
   "description": BlocksContent,
   "slug": string,
@@ -34,7 +34,7 @@ interface ArticleItemAttributes {
       "attributes": {
         "thumbhash": string,
         "name": "jakub_dziubak_Xt_Ud5_Si_X464_unsplash.jpg",
-        "alternativeText": string | null,
+        "alternativeText"?: string,
         "height": number,
         "width": number
       }

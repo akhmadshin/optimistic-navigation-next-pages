@@ -1,5 +1,5 @@
 interface Window {
   pageMounted?: () => void;
-  placeholderData?: any;
+  placeholderData?: object;
   pageMountedPromise?: Promise<void>;
 }

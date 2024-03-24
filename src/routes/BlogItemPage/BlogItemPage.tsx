@@ -1,18 +1,15 @@
 import { Component } from '@/types/general';
+
 import { Meta } from '@/components/Meta';
 import { Image } from '@/components/Image';
 import { RichText } from '@/components/RichText';
 import { Container } from '@/components/Container';
 import React from 'react';
-import { UselessCalculations } from '@/routes/BlogItemPage/UselessCalculations';
+import { UselessCalculations } from '@/components/UselessCalculations';
+import { BlogItemPageProps } from '@/pages/blog/[slug]';
 
-export const BlogItemPage: Component<any> = ({ article }) => {
-  if (!article) {
-    return undefined;
-  }
-
-
-  const articleAttributes = article.attributes || {};
+export const BlogItemPage: Component<BlogItemPageProps> = ({  attributes }) => {
+  const articleAttributes = attributes || {};
   const coverAttributes = articleAttributes.thumbnail?.data?.attributes || {};
   const {title, description, content} = articleAttributes;
 
@@ -40,9 +37,9 @@ export const BlogItemPage: Component<any> = ({ article }) => {
 
         <div className="dark:text-gray-100">
           <RichText content={description} />
-          <UselessCalculations />
           <div className="mt-10">
             <div className="prose lg:prose-xl max-w-none dark:prose-invert">
+              <UselessCalculations />
               <RichText content={content} />
             </div>
           </div>
