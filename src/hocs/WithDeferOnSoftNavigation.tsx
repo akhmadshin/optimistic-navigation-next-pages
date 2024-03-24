@@ -1,5 +1,6 @@
 import { Component, ParentComponent } from '@/types/general';
 import { useEffect, useState } from 'react';
+import { latency } from '@/contants/server';
 
 interface Props {
   loader?: Component;
@@ -13,7 +14,7 @@ export const WithDeferOnSoftNavigation: ParentComponent<Props> = ({ children, lo
       return;
     }
     // @ts-ignore
-    const deferTime = document.startViewTransition ? 532 : 32;
+    const deferTime = document.startViewTransition ? latency + 32 : 32;
     setTimeout(async () => {
       setSoftNavigationActive(false)
     }, deferTime)

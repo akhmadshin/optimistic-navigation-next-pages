@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next';
 import { ArticleItem } from '@/types/api';
 import { timeout } from '@/lib/api-helpers';
 import { promises as fs } from 'fs';
+import { latency } from '@/contants/server';
 
 export type BlogItemPageProps = ArticleItem;
 
@@ -16,7 +17,7 @@ export const getServerSideProps: GetStaticProps<ArticleItem> = async (props) => 
   const { slug } = props.params as { slug: string };
   let result;
   // Imitate slow api
-  await timeout(600);
+  await timeout(latency);
 
   // const token = process.env.STRAPI_API_TOKEN;
   // const path = `/articles/`;
