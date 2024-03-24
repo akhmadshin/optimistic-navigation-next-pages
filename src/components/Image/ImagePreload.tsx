@@ -29,7 +29,6 @@ export const ImagePreload = ({
     width: Number(width),
     height: Number(height),
   };
-  console.log('imgAttributes = ', imgAttributes);
   const opts = {
     as: 'image',
     imageSrcSet: imgAttributes.srcSet,

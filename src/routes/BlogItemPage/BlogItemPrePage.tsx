@@ -6,9 +6,10 @@ import { SkeletonBlogItemPrePage } from './SkeletonBlogItemPrePage';
 import { Image } from '@/components/Image/Image';
 import { RichText } from '@/components/RichText/RichText';
 import { usePageData } from '@/hooks/usePageData';
+import { BlogItemPageProps } from '@/pages/blog/[slug]';
 
 export const BlogItemPrePage: ParentComponent = ({ children}) => {
-  const { data: article, isLoading, isFetching} = usePageData();
+  const { data: article, isLoading, isFetching} = usePageData<BlogItemPageProps>();
 
   if (!article && (isLoading || isFetching)) {
     return (

@@ -2,7 +2,7 @@ import qs from "qs";
 import { getStrapiURL } from "./api-helpers";
 
 
-export async function fetchAPI(path: string, urlParamsObject = {}, options = {}) {
+export async function fetchAPI<T>(path: string, urlParamsObject = {}, options = {}) {
   // Merge default and user options
   const mergedOptions = {
     headers: {
@@ -26,5 +26,5 @@ export async function fetchAPI(path: string, urlParamsObject = {}, options = {})
     throw new Error(`An error occurred please try again`);
   }
   const data = await response.json();
-  return data;
+  return data as T;
 }

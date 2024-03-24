@@ -1,11 +1,10 @@
 import { ImageConfig, ImageConfigComplete } from 'next/dist/shared/lib/image-config';
 import imageLoader from '@/lib/imageLoader';
 
-const getWidths = ({ deviceSizes, imageSizes }: ImageConfig,
+const getWidths = ({ deviceSizes, imageSizes }: ImageConfigComplete,
   width: number | undefined,
   sizes: string | undefined
 ): { widths: number[]; kind: 'w' | 'x' } => {
-  // @ts-ignore
   const allSizes = [...deviceSizes, ...imageSizes].sort((a, b) => a - b)
 
   if (sizes) {
@@ -17,18 +16,19 @@ const getWidths = ({ deviceSizes, imageSizes }: ImageConfig,
     }
     if (percentSizes.length) {
       const smallestRatio = Math.min(...percentSizes) * 0.01
-      // @ts-ignore
       return { widths: allSizes.filter((s) => s >= deviceSizes[0] * smallestRatio), kind: 'w' }
     }
     return { widths: allSizes, kind: 'w' }
   }
   if (typeof width !== 'number') {
-    // @ts-ignore
     return { widths: deviceSizes, kind: 'w' }
   }
 
-  // @ts-ignore
-  const widths = [...new Set([width, width * 2 /*, width * 3*/].map((w) => allSizes.find((p) => p >= w) || allSizes[allSizes.length - 1])),]
+  const widths = [...Array.from(new Set([
+    width, width * 2 /*, width * 3*/
+  ]
+    .map((w) => allSizes
+      .find((p) => p >= w) || allSizes[allSizes.length - 1]))),]
   return { widths, kind: 'x' }
 }
 

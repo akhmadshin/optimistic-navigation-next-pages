@@ -18,15 +18,6 @@ export function Header() {
           >
             <span className="font-bold">Home</span>
           </Link>
-          {/*<div className="flex items-center">*/}
-          {/*  <input*/}
-          {/*    id="default-checkbox"*/}
-          {/*    type="checkbox"*/}
-          {/*    value=""*/}
-          {/*    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"*/}
-          {/*  />*/}
-          {/*  <label htmlFor="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Optimistic navigation</label>*/}
-          {/*</div>*/}
           <div className="">
             <div className="flex flex-row gap-3">
               <span className="font-bold hidden sm:block">Contacts:</span>
@@ -42,12 +33,12 @@ export function Header() {
               </a>
             </div>
           </div>
-          {/*<Link*/}
-          {/*  href="/blog/lorem-ipsum/"*/}
-          {/*  aria-label="Lorem ipsum"*/}
-          {/*>*/}
-          {/*  <span className="font-bold">Lorem ipsum</span>*/}
-          {/*</Link>*/}
+          <Link
+            href="/blog/lorem-ipsum22/"
+            aria-label="Lorem ipsum"
+          >
+            <span className="font-bold">Lorem ipsum</span>
+          </Link>
         </div>
       </Container>
     </header>

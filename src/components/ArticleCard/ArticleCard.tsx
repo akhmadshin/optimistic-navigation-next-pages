@@ -4,8 +4,14 @@ import { Link } from '@/components/Link';
 import { SkeletonArticleCard } from '@/components/ArticleCard/SkeletonArticleCard';
 import { Image } from '@/components/Image/Image';
 import { RichText } from '@/components/RichText';
+import { ArticleListItem } from '@/types/api';
 
-export const ArticleCard: React.FC<any> = (props) => {
+interface Props {
+  article?: ArticleListItem;
+  priority: boolean;
+}
+
+export const ArticleCard: React.FC<Props> = ({ article, priority }) => {
   const imageRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -16,18 +22,17 @@ export const ArticleCard: React.FC<any> = (props) => {
     }
     containerRef.current.addEventListener("mouseenter", (e) => {
       setPrefetchSizes('100vw');
-      console.log("mouseOver");
     }, { once: true });
   }, [containerRef])
 
   const handleClick = () => {
   }
 
-  if (!props.article) {
+  if (!article) {
     return <SkeletonArticleCard/>
   }
 
-  const articleAttributes = props.article.attributes;
+  const articleAttributes = article.attributes;
   const coverAttributes = articleAttributes.thumbnail.data?.attributes;
 
   const handleBeforeTransition = () => {
@@ -48,7 +53,7 @@ export const ArticleCard: React.FC<any> = (props) => {
       <article className="flex flex-col items-start justify-between card pointer-events-none">
         <div className="relative w-full">
           <Image
-            priority={props.priority}
+            priority={priority}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
             ref={imageRef}
             thumbhash={coverAttributes.thumbhash}
@@ -69,7 +74,7 @@ export const ArticleCard: React.FC<any> = (props) => {
               afterTransition={handleAfterTransition}
               href={`/blog/${articleAttributes.slug}/`}
               onClick={handleClick}
-              data={props.article}
+              data={article}
               className={'pointer-events-auto card-link'}
             >
               {articleAttributes.title}

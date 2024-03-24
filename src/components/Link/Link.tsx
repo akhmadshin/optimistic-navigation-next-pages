@@ -9,7 +9,7 @@ type LinkPropsReal = React.PropsWithChildren<Omit<React.AnchorHTMLAttributes<HTM
   LinkProps>
 
 export type LinkPropsModified = LinkPropsReal & {
-  data?: any;
+  data?: object;
   beforeTransition?: () => void;
   afterTransition?: () => void;
 }
@@ -31,14 +31,13 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkPropsModified>(funct
   const isSameUrl = currentUrl === href;
 
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
-
     if (onClick) {
       onClick(e);
     }
     if (isAbsoluteUrlOrAnchorUrl || e.metaKey) {
       return;
     }
-    handleLocalRouteNavigation(data);
+    handleLocalRouteNavigation();
   }
 
   const handleKeyPress = (e: KeyboardEvent<HTMLAnchorElement>) => {
@@ -48,10 +47,10 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkPropsModified>(funct
     if (isAbsoluteUrlOrAnchorUrl || e.metaKey) {
       return;
     }
-    handleLocalRouteNavigation(data);
+    handleLocalRouteNavigation();
   }
 
-  const handleLocalRouteNavigation = (data: any) => {
+  const handleLocalRouteNavigation = () => {
     if (isSameUrl) {
       return;
     }

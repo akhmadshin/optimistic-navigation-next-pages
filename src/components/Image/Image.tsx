@@ -2,11 +2,11 @@ import { ImageProps } from 'next/image';
 import NextImage from 'next/image';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { createPngDataUri } from '@/lib/createPngDataUri';
-import { requestIdleCallback } from '@/lib/request-idle-callback';
 import { ImagePreload } from './ImagePreload';
 
-type Props = ImageProps & {
+type Props = Omit<ImageProps, 'alt'> & {
   thumbhash: string;
+  alt?: string;
   prefetchSizes?: string;
 }
 
@@ -54,7 +54,7 @@ export const Image = forwardRef<HTMLImageElement, Props>(({
         title={title || ''}
         height={fill ? undefined : height}
         width={fill ? undefined : width}
-        placeholder={blurDataURL as any}
+        placeholder={blurDataURL as `data:image/${string}`}
         ref={(node) => {
           // @ts-ignore
           imgRef.current = node;

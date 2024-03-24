@@ -4,7 +4,7 @@ import { ComponentType, useEffect } from 'react';
 
 interface Props {
   prePage: ParentComponent;
-  postPage?: ComponentType<any>;
+  postPage?: ComponentType;
   postPageLoader: Component;
   deferPostPage?: boolean;
 }

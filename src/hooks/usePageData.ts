@@ -6,12 +6,12 @@ function getPathFromUrl(url: string) {
   return url.split(/[?#]/)[0];
 }
 
-export const usePageData = () => {
+export const usePageData = <T>() => {
   const router = useRouter();
   const client = useQueryClient();
   const placeholderData = typeof window === 'undefined' ? undefined : window.placeholderData;
 
-  return useQuery<unknown, unknown, any>({
+  return useQuery<unknown, unknown, T>({
     queryKey: router && client ? [getPathFromUrl(router.asPath)] : undefined,
     placeholderData,
     queryFn: async () => {
@@ -19,7 +19,6 @@ export const usePageData = () => {
         const res = await fetch(
           PageRouter.router!.pageLoader.getDataHref({
             href: formatWithValidation({ pathname: router.route, query: router.query }),
-
             asPath: router.asPath,
           })
         );

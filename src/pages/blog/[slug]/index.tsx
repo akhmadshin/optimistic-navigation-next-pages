@@ -1,7 +1,12 @@
-import { dehydrate, QueryClient } from '@tanstack/react-query'
+import { dehydrate, DehydratedState, QueryClient } from '@tanstack/react-query'
 import { BlogItemPage } from '@/routes/BlogItemPage';
 import { GetStaticProps } from 'next';
 import { fetchAPI } from '@/lib/fetch-api';
+import { ArticleItem, ArticleList } from '@/types/api';
+import { timeout } from '@/lib/api-helpers';
+import { promises as fs } from 'fs';
+
+export type BlogItemPageProps = ArticleItem;
 
 export default function Page() {
   return (
@@ -9,58 +14,44 @@ export default function Page() {
   )
 }
 
-export async function getStaticPaths() {
-  const pageNumber = 0;
-  const limitNumber = 10;
-  const token = process.env.STRAPI_API_TOKEN;
-  const path = `/articles`;
-
-  const urlParamsObject = {
-    sort: { createdAt: "desc" },
-    fields: ['title', 'description', 'slug', 'content'],
-    populate: {
-      thumbnail: {
-        fields: ['thumbhash', 'name', 'slug', 'alternativeText', 'height', 'width'],
-      },
-    },
-    pagination: {
-      start: pageNumber * limitNumber,
-      limit: limitNumber,
-    },
-  };
-  const options = { headers: { Authorization: `Bearer ${token}` } };
-  const posts = await fetchAPI(path, urlParamsObject, options);
-
-  const paths = posts.data.map((post: any) => ({
-    params: { slug: post.attributes.slug },
-  }))
-
-  return { paths, fallback: false }
-}
-
-export const getStaticProps: GetStaticProps<{ dehydratedState: any }> = async (props) => {
+export const getServerSideProps: GetStaticProps<{ dehydratedState: DehydratedState }> = async (props) => {
   const { slug } = props.params as { slug: string };
-  const queryClient = new QueryClient()
+  let result;
+  const queryClient = new QueryClient();
   await queryClient.prefetchQuery({
     queryKey: [`/blog/${slug}/`],
-    queryFn: () => {
-      const token = process.env.STRAPI_API_TOKEN;
-      const path = `/articles/`;
-      const urlParamsObject = {
-        filters: {
-          slug: slug,
-        },
-        fields: ['title', 'description', 'slug', 'content'],
-        populate: {
-          thumbnail: {
-            fields: ['thumbhash', 'name', 'slug', 'alternativeText', 'height', 'width'],
-          },
-        },
-      };
-      const options = { headers: { Authorization: `Bearer ${token}` } };
-      return fetchAPI(path, urlParamsObject, options).then((article) => article.data[0]).catch((e) => console.log(e));
+    queryFn: async () => {
+      // Imitate slow api
+      await timeout(600);
+
+      // const token = process.env.STRAPI_API_TOKEN;
+      // const path = `/articles/`;
+      // const urlParamsObject = {
+      //   filters: {
+      //     slug: slug,
+      //   },
+      //   fields: ['title', 'description', 'slug', 'content'],
+      //   populate: {
+      //     thumbnail: {
+      //       fields: ['thumbhash', 'name', 'slug', 'alternativeText', 'height', 'width'],
+      //     },
+      //   },
+      // };
+      // const options = { headers: { Authorization: `Bearer ${token}` } };
+      // return fetchAPI<ArticleList>(path, urlParamsObject, options).then((article) => article.data[0]).catch((e) => console.log(e));
+      const file = await fs.readFile(process.cwd() + `/public/mocks/${slug}.json`, 'utf8').catch(e => {
+        throw new Error(e);
+      });
+      result = JSON.parse(file)
+      return result;
     }
   })
+
+  if (!result) {
+    return {
+      notFound: true,
+    }
+  }
 
   return {
     props: {
