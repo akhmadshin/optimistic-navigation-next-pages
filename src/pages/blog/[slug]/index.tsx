@@ -13,12 +13,14 @@ export default function Page() {
   )
 }
 
-export const getServerSideProps = withServerSideTanStackQuery<{ slug: string }>(async ({ params }) => {
+export const getServerSideProps = withServerSideTanStackQuery<ArticleItem, { slug: string }>(async ({ params }) => {
   const { slug } = params || {};
   // Imitate slow api
   await timeout(latency);
   const file = await fs.readFile(process.cwd() + `/public/mocks/${slug}.json`, 'utf8').catch(e => {
     throw new Error(e);
   });
-  return JSON.parse(file)
+  return {
+    props: JSON.parse(file) as ArticleItem,
+  }
 })

@@ -11,7 +11,9 @@ export const getServerSideProps = withServerSideTanStackQuery(async () => {
   // Imitate slow api
   await timeout(latency);
   const file = await fs.readFile(process.cwd() + '/public/mocks/articles.json', 'utf8');
-  return JSON.parse(file);
+  return {
+    props: JSON.parse(file)
+  };
 })
 
 export default function Page() {

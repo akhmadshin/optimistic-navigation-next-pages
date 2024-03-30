@@ -30,6 +30,9 @@ export const usePageData = <T>() => {
         );
         if (res.ok) {
           const data = await res.json();
+          if (!data.pageProps.dehydratedState) {
+            return router.reload();
+          }
           const { state } = data.pageProps.dehydratedState.queries[0];
           // client.setQueriesData(queryKey, state.data);
           return state.data;
