@@ -1,6 +1,5 @@
-import PageRouter, { useRouter } from 'next/router';
+import PageRouter from 'next/router';
 import { useEffect } from 'react';
-import { dehydrate, useQueryClient } from '@tanstack/react-query';
 
 export const useSoftNavigationIntercept = () => {
   useEffect(() => {

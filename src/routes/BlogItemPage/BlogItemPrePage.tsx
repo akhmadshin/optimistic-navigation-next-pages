@@ -50,8 +50,10 @@ export const BlogItemPrePage: ParentComponent = ({ children}) => {
           </div>
         </div>
 
-        <div className="dark:text-gray-100">
+        <div className="text-white text-xl">
           <RichText content={description} />
+        </div>
+        <div className="dark:text-gray-100">
           {children}
         </div>
       </article>
