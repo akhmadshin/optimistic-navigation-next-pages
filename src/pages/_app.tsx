@@ -17,8 +17,8 @@ import { useRouter } from 'next/router';
     return;
   }
   const routeLoader = createRouteLoader('');
-  routeLoader.prefetch('/').catch(e => console.log('error = ', e));
-  routeLoader.prefetch('/blog/[slug]').catch(e => console.log('error = ', e));
+  routeLoader.prefetch('/');
+  routeLoader.prefetch('/blog/[slug]');
 })()
 
 export default function MyApp({Component, pageProps}: AppProps) {
@@ -27,7 +27,7 @@ export default function MyApp({Component, pageProps}: AppProps) {
   const router = useRouter();
 
   useEffect(() => {
-    router.prefetch = async () => { }
+    router.prefetch = async () => {}
   }, [router])
 
   return (

@@ -31,7 +31,8 @@ export const usePageData = <T>() => {
         if (res.ok) {
           const data = await res.json();
           if (!data.pageProps.dehydratedState) {
-            return router.reload();
+            router.reload();
+            throw new Error('pageProps.dehydratedState is empty');
           }
           const { state } = data.pageProps.dehydratedState.queries[0];
           // client.setQueriesData(queryKey, state.data);

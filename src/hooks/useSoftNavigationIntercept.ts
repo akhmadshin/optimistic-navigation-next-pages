@@ -13,7 +13,7 @@ export const useSoftNavigationIntercept = () => {
       if (key !== '/_app') delete PageRouter.router.components[key];
     }
 
-    const {loadPage: originalLoadPage} = pageLoader;
+    const originalLoadPage = pageLoader.loadPage;
     pageLoader.loadPage = (...args) => {
       return (
         originalLoadPage

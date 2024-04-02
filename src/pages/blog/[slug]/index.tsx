@@ -17,10 +17,14 @@ export const getServerSideProps = withServerSideTanStackQuery<ArticleItem, { slu
   const { slug } = params || {};
   // Imitate slow api
   await timeout(latency);
-  const file = await fs.readFile(process.cwd() + `/public/mocks/${slug}.json`, 'utf8').catch(e => {
-    throw new Error(e);
-  });
-  return {
-    props: JSON.parse(file) as ArticleItem,
+  try {
+    const file = await fs.readFile(process.cwd() + `/public/mocks/${slug}.json`, 'utf8');
+    return {
+      props: JSON.parse(file) as ArticleItem,
+    }
+  } catch (e) {
+    return {
+      notFound: true,
+    }
   }
 })
