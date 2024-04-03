@@ -5,7 +5,7 @@ import { dehydrate, QueryClient } from '@tanstack/react-query';
 export const withServerSideTanStackQuery = <T extends object, Q extends ParsedUrlQuery = ParsedUrlQuery>(getServerSideProps: GetServerSideProps<T, Q>) => async (
   props: GetServerSidePropsContext<Q>,
 ) => {
-  const { resolvedUrl  } = props;
+  const { resolvedUrl, res  } = props;
   let result: GetServerSidePropsResult<T>;
   const queryClient = new QueryClient();
 
@@ -16,6 +16,21 @@ export const withServerSideTanStackQuery = <T extends object, Q extends ParsedUr
       return result?.props;
     }
   })
+
+  // const originalEnd = res.end;
+  // // @ts-ignore
+  // res.end = function (...args: any) {
+  //   const getFormattedArgs = () => {
+  //     console.log('args = ', args);
+  //     // @ts-ignore
+  //     const [data, ...restArgs] = args;
+  //     if (/^<!DOCTYPE html>/.test(data)) {
+  //       return args;
+  //     }
+  //     return [data.replace(`"__N_SSP":true}`, `"__N_SSP":false}`), ...restArgs];
+  //   }
+  //   originalEnd.apply(res, getFormattedArgs());
+  // };
 
   // @ts-ignore
   if (!result) {
