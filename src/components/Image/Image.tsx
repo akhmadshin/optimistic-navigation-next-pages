@@ -2,6 +2,7 @@ import { ImageProps } from 'next/image';
 import NextImage from 'next/image';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import { createPngDataUri } from '@/lib/createPngDataUri';
+import { requestIdleCallback } from '@/lib/request-idle-callback'
 import { ImagePreload } from './ImagePreload';
 
 type Props = Omit<ImageProps, 'alt'> & {
