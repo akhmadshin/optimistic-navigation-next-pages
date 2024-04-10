@@ -17,32 +17,32 @@ export function Header() {
           >
             <span className="font-bold">Home</span>
           </Link>
-          <div className="flex justify-between items-center gap-6">
-            <Link
-              href="/blog/lorem-ipsum"
-              aria-label="Lorem ipsum"
-            >
-              <span className="font-bold">Lorem ipsum</span>
-            </Link>
-            <Link
-              href="/blog/lorem-ipsum404"
-              aria-label="404"
-            >
-              <span className="font-bold">404</span>
-            </Link>
-            <Link
-              href="/redirect-middleware"
-              aria-label="Redirect middleware"
-            >
-              <span className="font-bold">Middleware</span>
-            </Link>
-            <Link
-              href="/redirect-getserversideprops"
-              aria-label="Redirect"
-            >
-              <span className="font-bold">Redirect</span>
-            </Link>
-          </div>
+          {/*<div className="flex justify-between items-center gap-6">*/}
+          {/*  <Link*/}
+          {/*    href="/blog/lorem-ipsum"*/}
+          {/*    aria-label="Lorem ipsum"*/}
+          {/*  >*/}
+          {/*    <span className="font-bold">Lorem ipsum</span>*/}
+          {/*  </Link>*/}
+          {/*  <Link*/}
+          {/*    href="/blog/lorem-ipsum404"*/}
+          {/*    aria-label="404"*/}
+          {/*  >*/}
+          {/*    <span className="font-bold">404</span>*/}
+          {/*  </Link>*/}
+          {/*  <Link*/}
+          {/*    href="/redirect-middleware"*/}
+          {/*    aria-label="Redirect middleware"*/}
+          {/*  >*/}
+          {/*    <span className="font-bold">Middleware</span>*/}
+          {/*  </Link>*/}
+          {/*  <Link*/}
+          {/*    href="/redirect-getserversideprops"*/}
+          {/*    aria-label="Redirect"*/}
+          {/*  >*/}
+          {/*    <span className="font-bold">Redirect</span>*/}
+          {/*  </Link>*/}
+          {/*</div>*/}
           <div className="">
             <div className="flex flex-row gap-3">
               <span className="font-bold hidden sm:block">Contacts:</span>

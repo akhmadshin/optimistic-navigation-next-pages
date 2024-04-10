@@ -2,6 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   trailingSlash: true,
+  // output: 'export',
   images: {
     loader: 'custom',
     loaderFile: './src/lib/imageLoader.ts',

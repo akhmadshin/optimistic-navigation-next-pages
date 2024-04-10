@@ -1,14 +1,18 @@
 import { ParsedUrlQuery } from 'querystring';
-import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
+import {
+  GetServerSidePropsResult,
+  GetStaticProps,
+  GetStaticPropsContext
+} from 'next';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 
-export const withServerSideTanStackQuery = <T extends object, Q extends ParsedUrlQuery = ParsedUrlQuery>(getServerSideProps: GetServerSideProps<T, Q>) => async (
-  props: GetServerSidePropsContext<Q>,
+export const withSSGTanStackQuery = <T extends object, Q extends ParsedUrlQuery = ParsedUrlQuery>(getResolvedUrl: (context: Q) => string, getServerSideProps: GetStaticProps<T, Q>) => async (
+  props: GetStaticPropsContext<Q>,
 ) => {
-  const { resolvedUrl, res  } = props;
   let result: GetServerSidePropsResult<T>;
   const queryClient = new QueryClient();
 
+  const resolvedUrl = getResolvedUrl(props.params as Q);
   await queryClient.prefetchQuery({
     queryKey: [resolvedUrl],
     queryFn: async () => {
