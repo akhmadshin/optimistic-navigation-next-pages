@@ -1,22 +1,12 @@
 import PageRouter, { useRouter } from 'next/router';
 import { useQuery } from '@tanstack/react-query';
-import { formatUrl, formatWithValidation } from 'next/dist/shared/lib/router/utils/format-url';
-import { ParsedUrlQuery } from 'querystring';
-
-const getResolvedUrl = (urlPathname: string, query: ParsedUrlQuery) => {
-  const hadTrailingSlash = urlPathname !== '/' && process.env.__NEXT_TRAILING_SLASH;
-
-  return formatUrl({
-    pathname: `${urlPathname}${hadTrailingSlash ? '/' : ''}`,
-    query,
-  })
-}
+import { formatWithValidation } from 'next/dist/shared/lib/router/utils/format-url';
 
 export const usePageData = <T>() => {
   const router = useRouter();
   const placeholderData = typeof window === 'undefined' ? undefined : window.placeholderData;
+  const resolvedUrl = router.asPath;
 
-  const resolvedUrl = getResolvedUrl(router.pathname, router.query);
   return useQuery<unknown, unknown, T>({
     queryKey: resolvedUrl ? [resolvedUrl] : undefined,
     placeholderData,
