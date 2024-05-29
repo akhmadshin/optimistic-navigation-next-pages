@@ -1,65 +1,36 @@
-import NextLink, { LinkProps } from 'next/link';
-import React, { KeyboardEvent, MouseEvent } from 'react';
-
-import { onActionKeyPress } from '@/lib/navigation-utils';
+import type { LinkProps } from 'next/link';
+import NextLink from 'next/link';
+import singletonRouter from 'next/router';
+import { handleOptimisticNavigation } from 'next-optimistic-link';
+import type { AnchorHTMLAttributes, MouseEvent, PropsWithChildren } from 'react';
+import React from 'react';
 import { transitionHelper } from '@/lib/transition-utils';
-import { getUrl } from '@/lib/getUrl';
 
-type LinkPropsReal = React.PropsWithChildren<Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> &
+type NextLinkProps = PropsWithChildren<Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> &
   LinkProps>
 
-export type LinkPropsModified = LinkPropsReal & {
+type Props = NextLinkProps & {
   data?: object;
   beforeTransition?: () => void;
   afterTransition?: () => void;
 }
 
-export const Link = React.forwardRef<HTMLAnchorElement, LinkPropsModified>(function LinkComponent(props, forwardedRef) {
+export const Link: React.FC<PropsWithChildren<Props>> = (props) => {
   const {
-    data,
     onClick,
-    onKeyPress,
-    href,
     children,
     beforeTransition,
     afterTransition,
     ...restProps
   } = props;
-  let currentUrl = getUrl();
-  const isAbsoluteUrlOrAnchorUrl = typeof href === 'string' && (/^http/.test(href) || /^#/.test(href));
-  const isSameUrl = currentUrl === href;
-
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
-    currentUrl = getUrl();
-
     if (onClick) {
       onClick(e);
     }
-    if (isAbsoluteUrlOrAnchorUrl || e.metaKey) {
-      return;
-    }
-    handleLocalRouteNavigation();
-  }
-
-  const handleKeyPress = (e: KeyboardEvent<HTMLAnchorElement>) => {
-    if (onKeyPress) {
-      onKeyPress(e);
-    }
-    if (isAbsoluteUrlOrAnchorUrl || e.metaKey) {
-      return;
-    }
-    handleLocalRouteNavigation();
-  }
-
-  const handleLocalRouteNavigation = () => {
-    if (isSameUrl) {
-      return;
-    }
-    if (data) {
-      window.placeholderData = data;
-    }
-
-    startPageTransition();
+    handleOptimisticNavigation(props.href, singletonRouter, () => {
+      window.placeholderData = props.data;
+      startPageTransition();
+    });
   }
 
   const startPageTransition = () => {
@@ -69,7 +40,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkPropsModified>(funct
 
     if (!window.pageMounted) {
       window.pageMountedPromise = new Promise(resolve => {
-        window.pageMounted = resolve as any;
+        window.pageMounted = resolve;
       })
     }
 
@@ -88,11 +59,9 @@ export const Link = React.forwardRef<HTMLAnchorElement, LinkPropsModified>(funct
   return (
     <NextLink
       onClick={handleClick}
-      onKeyPress={onActionKeyPress<HTMLAnchorElement>((e) => handleKeyPress(e))}
-      href={href}
-      prefetch={false}
-      ref={forwardedRef}
       {...restProps}
-    >{children}</NextLink>
+    >
+      {children}
+    </NextLink>
   )
-})
+}

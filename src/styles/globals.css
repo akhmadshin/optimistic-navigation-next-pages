@@ -2,26 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .card {
+    @apply relative z-0;
+  }
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+  .card-link {
+    @apply before:absolute before:inset-0 before:z-[-1] before:content-[''] pointer-events-auto;
   }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: #1B2A38;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 47.4% 11.2%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+  }
+
+  .dark {
+    --background: 224 71% 4%;
+    --foreground: 213 31% 91%;
+
+    --accent: 220 25% 12%;
+    --accent-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 1.2%;
+
+    --secondary: 222.2 47.4% 11.2%;
+    --secondary-foreground: 210 40% 98%;
+  }
 }
 
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
 
 .main-header {
   view-transition-name: main-header;
@@ -37,20 +63,6 @@ body {
 
 .banner-img {
   view-transition-name: banner-img;
-}
-
-.gallery img {
-  contain: paint;
-}
-
-@layer components {
-  .card {
-    @apply relative z-0;
-  }
-
-  .card-link {
-    @apply before:absolute before:inset-0 before:z-[-1] before:content-[''] pointer-events-auto;
-  }
 }
 
 @keyframes fade-in {

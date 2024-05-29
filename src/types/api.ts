@@ -1,6 +1,4 @@
-import {
-  type BlocksContent,
-} from "@strapi/blocks-react-renderer";
+import type {BlocksContent} from "@strapi/blocks-react-renderer";
 
 export interface APIResponseCollectionPagination {
   page: number;
@@ -47,6 +45,6 @@ export interface ArticleListItem {
   attributes: Omit<ArticleItemAttributes, 'content'>,
 }
 
-export type ArticleList = APIResponseCollection<ArticleListItem>;
+export type ArticleListApi = APIResponseCollection<ArticleListItem>;
 
-export type ArticleItem = APIResponse<ArticleItemAttributes>;
+export type ArticleItemApi = APIResponse<ArticleItemAttributes>;

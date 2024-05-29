@@ -1,27 +1,27 @@
 import { BlogItemPage } from '@/routes/BlogItemPage';
-import { ArticleItem } from '@/types/api';
+import type { ArticleItemApi, ArticleListApi } from '@/types/api';
 import { timeout } from '@/lib/api-helpers';
 import { promises as fs } from 'fs';
 import { latency } from '@/contants/server';
-import { withSSGTanStackQuery } from '@/lib/withSSGTanStackQuery';
 import { withSSRTanStackQuery } from '@/lib/withSSRTanStackQuery';
+import { withSSGTanStackQuery } from '@/lib/withSSGTanStackQuery';
 
-export type BlogItemPageProps = ArticleItem;
+export type BlogItemPageProps = ArticleItemApi;
 
 export default function Page() {
   return (
     <BlogItemPage />
   )
 }
-
-export const getServerSideProps = withSSRTanStackQuery<ArticleItem, { slug: string }>(async ({ params }) => {
-  const { slug } = params || {};
+// export const getServerSideProps = withSSRTanStackQuery<ArticleItemApi, { slug: string }>(async ({ params }) => {
+export const getStaticProps = withSSGTanStackQuery<ArticleItemApi, { slug: string }>(({ slug }) => `/blog/${slug}/`, async ({ params }) => {
+  const { slug } = params ?? {};
   // Imitate slow api
-  await timeout(latency);
+  await timeout(latency as number);
   try {
     const file = await fs.readFile(process.cwd() + `/public/mocks/${slug}.json`, 'utf8');
     return {
-      props: JSON.parse(file) as ArticleItem,
+      props: JSON.parse(file) as ArticleItemApi,
     }
   } catch (e) {
     return {
@@ -29,30 +29,13 @@ export const getServerSideProps = withSSRTanStackQuery<ArticleItem, { slug: stri
     }
   }
 })
+export async function getStaticPaths() {
+  const file = await fs.readFile(process.cwd() + `/public/mocks/articles.json`, 'utf8');
+  const articles = JSON.parse(file) as ArticleListApi
 
-// export async function getStaticPaths() {
-//   const file = await fs.readFile(process.cwd() + `/public/mocks/articles.json`, 'utf8');
-//   const articles = JSON.parse(file)
-//
-//   const paths = articles.data.map((post: ArticleItem) => ({
-//     params: { slug: post.attributes.slug },
-//   }))
-//
-//   return { paths, fallback: false }
-// }
-//
-// export const getStaticProps = withSSGTanStackQuery<ArticleItem, { slug: string }>(({ slug }) => `/blog/[slug]/?slug=${slug}`, async ({ params }) => {
-//   const { slug } = params || {};
-//   // Imitate slow api
-//   await timeout(latency);
-//   try {
-//     const file = await fs.readFile(process.cwd() + `/public/mocks/${slug}.json`, 'utf8');
-//     return {
-//       props: JSON.parse(file) as ArticleItem,
-//     }
-//   } catch (e) {
-//     return {
-//       notFound: true,
-//     }
-//   }
-// })
+  const paths = articles.data.map((post) => ({
+    params: { slug: post.attributes.slug },
+  }))
+
+  return { paths, fallback: false }
+}
