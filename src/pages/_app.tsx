@@ -30,12 +30,12 @@ import { ThemeSwitch } from '@/components/ThemeSwitch/ThemeSwitch';
 
 const Providers: ParentComponent = ({ children }) => {
   const pathModifier = useCallback((pathname: string) => {
-    const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
-    const localeCodes = (process.env.NEXT_PUBLIC_LOCALES ?? '').split(',');
-
-    if (localeCodes.every((code) => !pathname.startsWith(`/${code}`))) {
-      pathname = `/${defaultLocale}${pathname}`;
-    }
+    // const defaultLocale = process.env.NEXT_PUBLIC_DEFAULT_LOCALE;
+    // const localeCodes = (process.env.NEXT_PUBLIC_LOCALES ?? '').split(',');
+    //
+    // if (localeCodes.every((code) => !pathname.startsWith(`/${code}`))) {
+    //   pathname = `/${defaultLocale}${pathname}`;
+    // }
 
     return pathname;
   }, []);
