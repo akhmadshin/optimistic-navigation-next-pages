@@ -23,12 +23,12 @@ export function Header() {
           >
             <span className="font-bold">404</span>
           </Link>
-          <Link
-            href="/blog/lorem-ipsum-404/"
-            aria-label="404"
-          >
-            <span className="font-bold">Article 404</span>
-          </Link>
+          {/*<Link*/}
+          {/*  href="/blog/lorem-ipsum-404/"*/}
+          {/*  aria-label="404"*/}
+          {/*>*/}
+          {/*  <span className="font-bold">Article 404</span>*/}
+          {/*</Link>*/}
           <Link
             locale="de"
             scroll={false}
