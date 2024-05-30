@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { usePageDataOptions } from 'next-optimistic-link';
+import { usePageDataOptions } from 'next-optimistic-router';
 import { useRouter } from 'next/router';
 
 export const usePageData = <T>() => {

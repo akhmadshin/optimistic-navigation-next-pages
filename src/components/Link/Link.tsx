@@ -1,7 +1,7 @@
 import type { LinkProps } from 'next/link';
 import NextLink from 'next/link';
 import singletonRouter from 'next/router';
-import { handleOptimisticNavigation } from 'next-optimistic-link';
+import { handleOptimisticNavigation } from 'next-optimistic-router';
 import type { AnchorHTMLAttributes, MouseEvent, PropsWithChildren } from 'react';
 import React from 'react';
 import { transitionHelper } from '@/lib/transition-utils';

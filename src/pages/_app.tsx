@@ -10,7 +10,7 @@ import { Page } from '@/components/Page';
 import { createRouteLoader } from '@/lib/route-loader';
 import { useRouter } from 'next/router';
 import { transitionHelper } from '@/lib/transition-utils';
-import { OptimisticLinkProvider } from 'next-optimistic-link';
+import { OptimisticRouterProvider } from 'next-optimistic-router';
 import singletonRouter from 'next/dist/client/router';
 import * as process from 'process';
 import { ParentComponent } from '@/types/general';
@@ -41,11 +41,11 @@ const Providers: ParentComponent = ({ children }) => {
   }, []);
 
   return (
-    <OptimisticLinkProvider pathModifier={pathModifier} singletonRouter={singletonRouter}>
+    <OptimisticRouterProvider pathModifier={pathModifier} singletonRouter={singletonRouter}>
       <ThemeProvider attribute="class" defaultTheme="dark">
         {children}
       </ThemeProvider>
-    </OptimisticLinkProvider>
+    </OptimisticRouterProvider>
   );
 }
 
