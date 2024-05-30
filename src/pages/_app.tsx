@@ -12,7 +12,6 @@ import { useRouter } from 'next/router';
 import { transitionHelper } from '@/lib/transition-utils';
 import { OptimisticRouterProvider } from 'next-optimistic-router';
 import singletonRouter from 'next/dist/client/router';
-import * as process from 'process';
 import { ParentComponent } from '@/types/general';
 import { ThemeProvider } from 'next-themes';
 import { ThemeSwitch } from '@/components/ThemeSwitch/ThemeSwitch';
@@ -22,8 +21,8 @@ import { ThemeSwitch } from '@/components/ThemeSwitch/ThemeSwitch';
     return;
   }
   const routeLoader = createRouteLoader('');
-  routeLoader.prefetch('/[locale]').catch((e: string) => { throw new Error(e) });
-  routeLoader.prefetch('/[locale]/blog/[slug]').catch((e: string) => { throw new Error(e) });
+  routeLoader.prefetch('/').catch((e: string) => { throw new Error(e) });
+  routeLoader.prefetch('/blog/[slug]').catch((e: string) => { throw new Error(e) });
 })()
 
 
