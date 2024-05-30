@@ -11,31 +11,21 @@ export function Header() {
     <header>
       <Container className="mb-16 main-header">
         <div className="flex justify-between items-center flex-1 pt-6 gap-6">
-          <Link
-            href="/"
-            aria-label="Home"
-          >
-            <span className="font-bold">Home</span>
-          </Link>
-          {/*<Link*/}
-          {/*  href="/deep/deep/test-404"*/}
-          {/*  aria-label="Home"*/}
-          {/*>*/}
-          {/*  <span className="font-bold">404</span>*/}
-          {/*</Link>*/}
-          <Link
-            href="/blog/lorem-ipsum-404/"
-            aria-label="404"
-          >
-            <span className="font-bold">Article 404</span>
-          </Link>
-          <Link
-            scroll={false}
-            href="/blog/lorem-ipsum/#testHash?test=query&query=test"
-            aria-label="Lorem-ipsum"
-          >
-            <span className="font-bold">Lorem ipsum</span>
-          </Link>
+          <div className="flex items-center gap-6 lg:gap-12">
+            <Link
+              href="/"
+              aria-label="Home"
+            >
+              <span className="font-bold">Home</span>
+            </Link>
+            <Link
+              scroll={false}
+              href="/blog/lorem-ipsum/#testHash?test=query&query=test"
+              aria-label="Lorem-ipsum"
+            >
+              <span className="font-bold">Lorem ipsum</span>
+            </Link>
+          </div>
           {/*<div className="flex justify-between items-center gap-6">*/}
           {/*  <Link*/}
           {/*    href="/blog/lorem-ipsum"*/}
