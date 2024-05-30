@@ -17,20 +17,19 @@ export function Header() {
           >
             <span className="font-bold">Home</span>
           </Link>
-          <Link
-            href="/deep/deep/test-404"
-            aria-label="Home"
-          >
-            <span className="font-bold">404</span>
-          </Link>
           {/*<Link*/}
-          {/*  href="/blog/lorem-ipsum-404/"*/}
-          {/*  aria-label="404"*/}
+          {/*  href="/deep/deep/test-404"*/}
+          {/*  aria-label="Home"*/}
           {/*>*/}
-          {/*  <span className="font-bold">Article 404</span>*/}
+          {/*  <span className="font-bold">404</span>*/}
           {/*</Link>*/}
           <Link
-            locale="de"
+            href="/blog/lorem-ipsum-404/"
+            aria-label="404"
+          >
+            <span className="font-bold">Article 404</span>
+          </Link>
+          <Link
             scroll={false}
             href="/blog/lorem-ipsum/#testHash?test=query&query=test"
             aria-label="Lorem-ipsum"
