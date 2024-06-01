@@ -2,7 +2,7 @@ import '@/styles/globals.css'
 
 import type { DehydratedState } from '@tanstack/react-query';
 import { HydrationBoundary } from '@tanstack/react-query'
-import React, { useCallback, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Header } from '@/components/Header';
 import type { AppProps } from 'next/app';
 import WithQueryClientProvider from '@/components/WithQueryClientProvider';
