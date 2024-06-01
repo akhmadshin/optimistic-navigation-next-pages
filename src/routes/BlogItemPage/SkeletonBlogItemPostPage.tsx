@@ -16,6 +16,5 @@ export const SkeletonBlogItemPostPage: Component = () => {
         <SkeletonText width="60%"/>
       </div>
     </div>
-
   );
 }

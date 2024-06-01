@@ -1,16 +1,15 @@
 import { Component } from '@/types/general';
-import { SkeletonBlogItemPostPage } from '@/routes/BlogItemPage/SkeletonBlogItemPostPage';
 import React from 'react';
 import { RichText } from '@/components/RichText';
 import { usePageData } from '@/hooks/usePageData';
-import { UselessCalculations } from '@/components/UselessCalculations';
 import { BlogItemPageProps } from '@/pages/blog/[slug]';
+import { SkeletonArticleList } from '@/components/ArticleList/SkeletonArticleList';
 
 export const BlogItemPostPage: Component = () => {
   const { data: article, isLoading, isFetching} = usePageData<BlogItemPageProps>();
 
   if (isLoading || isFetching) {
-    return <SkeletonBlogItemPostPage/>
+    return <SkeletonArticleList/>
   }
 
   if (!article) {
@@ -23,7 +22,6 @@ export const BlogItemPostPage: Component = () => {
   return (
     <div className="mt-10">
       <div className="prose lg:prose-xl max-w-none dark:prose-invert">
-        <UselessCalculations />
         <RichText content={content} />
       </div>
     </div>

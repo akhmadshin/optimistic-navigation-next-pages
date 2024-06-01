@@ -20,7 +20,7 @@
     "eslint": "8.22.0",
     "eslint-config-next": "14.1.0",
     "next": "14.1.0",
-    "next-optimistic-router": "^0.0.2",
+    "next-optimistic-router": "^0.0.3-rc.3",
     "next-themes": "^0.3.0",
     "postcss": "8.4.30",
     "qs": "^6.11.2",

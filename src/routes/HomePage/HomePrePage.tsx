@@ -4,6 +4,7 @@ import { Meta } from '@/components/Meta';
 import { usePageData } from '@/hooks/usePageData';
 
 export const HomePrePage: React.FC<PropsWithChildren> = ({children}) => {
+  // Call it here, so data fetch starts before HomePostPage.tsx chunk even loaded
   usePageData();
 
   return (

@@ -1,26 +1,24 @@
-import type { LinkProps } from 'next/link';
-import NextLink from 'next/link';
-import singletonRouter from 'next/router';
+import NextLink, { LinkProps } from 'next/link';
+import React, { AnchorHTMLAttributes, MouseEvent, PropsWithChildren } from 'react';
 import { handleOptimisticNavigation } from 'next-optimistic-router';
-import type { AnchorHTMLAttributes, MouseEvent, PropsWithChildren } from 'react';
-import React from 'react';
+import singletonRouter from 'next/router';
 import { transitionHelper } from '@/lib/transition-utils';
 
 type NextLinkProps = PropsWithChildren<Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> &
   LinkProps>
 
 type Props = NextLinkProps & {
-  data?: object;
+  placeholderData?: object;
   beforeTransition?: () => void;
   afterTransition?: () => void;
 }
-
-export const Link: React.FC<PropsWithChildren<Props>> = (props) => {
+export const Link = React.forwardRef<HTMLAnchorElement, Props>(function LinkComponent(props, forwardedRef) {
   const {
     onClick,
-    children,
+    href,
     beforeTransition,
     afterTransition,
+    children,
     ...restProps
   } = props;
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -28,7 +26,7 @@ export const Link: React.FC<PropsWithChildren<Props>> = (props) => {
       onClick(e);
     }
     handleOptimisticNavigation(props.href, singletonRouter, () => {
-      window.placeholderData = props.data;
+      window.placeholderData = props.placeholderData;
       startPageTransition();
     });
   }
@@ -59,9 +57,10 @@ export const Link: React.FC<PropsWithChildren<Props>> = (props) => {
   return (
     <NextLink
       onClick={handleClick}
+      href={href}
+      prefetch={false}
+      ref={forwardedRef}
       {...restProps}
-    >
-      {children}
-    </NextLink>
+    >{children}</NextLink>
   )
-}
+})

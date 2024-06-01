@@ -3,8 +3,8 @@ import { ParentComponent } from '@/types/general';
 import { Container } from '@/components/Container';
 import { Meta } from '@/components/Meta';
 import { SkeletonBlogItemPrePage } from './SkeletonBlogItemPrePage';
-import { Image } from '@/components/Image/Image';
-import { RichText } from '@/components/RichText/RichText';
+import { Image } from '@/components/Image';
+import { RichText } from '@/components/RichText';
 import { usePageData } from '@/hooks/usePageData';
 import { BlogItemPageProps } from '@/pages/blog/[slug]';
 
@@ -23,7 +23,6 @@ export const BlogItemPrePage: ParentComponent = ({ children}) => {
     return children;
   }
 
-
   const articleAttributes = article.attributes || {};
   const coverAttributes = articleAttributes.thumbnail?.data?.attributes || {};
   const {title, description} = articleAttributes;
@@ -41,7 +40,6 @@ export const BlogItemPrePage: ParentComponent = ({ children}) => {
             <Image
               priority
               sizes="100vw"
-              thumbhash={coverAttributes.thumbhash}
               src={`/${coverAttributes.name}`}
               alt={coverAttributes.alternativeText}
               width={coverAttributes.width}

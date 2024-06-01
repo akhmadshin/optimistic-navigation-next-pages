@@ -1897,10 +1897,10 @@ natural-compare@^1.4.0:
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
   integrity sha512-OWND8ei3VtNC9h7V60qff3SVobHr996CTwgxubgyQYEpg290h9J0buyECNNJexkFm5sOajh5G116RYA1c8ZMSw==
 
-next-optimistic-router@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/next-optimistic-router/-/next-optimistic-router-0.0.2.tgz#e19e753d0d3037e142c28692523e5309f1e72ca2"
-  integrity sha512-Zfm7gT6kYHC3mC6R3ORWblqhcVlgvip+941kuBXCwft+JQgSXOzpFdSh2QjSfqVCzB4kdJTLoVdJkh8sosh7Eg==
+next-optimistic-router@^0.0.3-rc.3:
+  version "0.0.3-rc.3"
+  resolved "https://registry.yarnpkg.com/next-optimistic-router/-/next-optimistic-router-0.0.3-rc.3.tgz#c4187f73a49470787852a8e52af32c5a73180fe2"
+  integrity sha512-KVWHyUkuyW5Ck1DbzT9VA1TzKCe76Eqy3y25KhOHFJ3mmMuuzZJ6+yfKkUGhPdF4wjU7h5pcbSD8fuXQCplEDA==
 
 next-themes@^0.3.0:
   version "0.3.0"

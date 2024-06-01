@@ -1,6 +1,6 @@
 import { BlogItemPage } from '@/routes/BlogItemPage';
 import type { ArticleItemApi, ArticleListApi } from '@/types/api';
-import { timeout } from '@/lib/api-helpers';
+import { timeout } from '@/lib/timeout';
 import { promises as fs } from 'fs';
 import { latency } from '@/contants/server';
 import { withSSRTanStackQuery } from '@/lib/withSSRTanStackQuery';

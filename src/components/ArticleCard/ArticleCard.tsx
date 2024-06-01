@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { Link } from '@/components/Link';
 import { SkeletonArticleCard } from '@/components/ArticleCard/SkeletonArticleCard';
-import { Image } from '@/components/Image/Image';
+import { Image } from '@/components/Image';
 import { RichText } from '@/components/RichText';
 import { ArticleListItem } from '@/types/api';
 
@@ -56,12 +56,10 @@ export const ArticleCard: React.FC<Props> = ({ article, priority }) => {
             priority={priority}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
             ref={imageRef}
-            thumbhash={coverAttributes.thumbhash}
             src={`/${coverAttributes.name}`}
             alt={coverAttributes.alternativeText}
             width={coverAttributes.width}
             height={coverAttributes.height}
-            prefetchSizes={prefetchSizes}
           />
           <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10"/>
         </div>
@@ -74,7 +72,7 @@ export const ArticleCard: React.FC<Props> = ({ article, priority }) => {
               afterTransition={handleAfterTransition}
               href={`/blog/${articleAttributes.slug}/`}
               onClick={handleClick}
-              data={article}
+              placeholderData={article}
               className={'pointer-events-auto card-link'}
             >
               {articleAttributes.title}

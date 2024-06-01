@@ -1,10 +1,9 @@
 import { promises as fs } from 'fs';
 import { HomePage } from '@/routes/HomePage';
-import { timeout } from '@/lib/api-helpers';
+import { timeout } from '@/lib/timeout';
 import { latency } from '@/contants/server';
 import type { ArticleListApi } from '@/types/api';
 import { withSSGTanStackQuery } from '@/lib/withSSGTanStackQuery';
-import { withSSRTanStackQuery } from '@/lib/withSSRTanStackQuery';
 
 export type HomePageProps = ArticleListApi;
 
