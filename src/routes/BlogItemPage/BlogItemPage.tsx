@@ -1,6 +1,7 @@
 import { ParentComponent } from '@/types/general';
 import { BlogItemPrePage } from '@/routes/BlogItemPage/BlogItemPrePage';
 import dynamic from 'next/dynamic';
+import { PageRenderer } from '@/components/PageRenderer/PageRenderer';
 import { SkeletonBlogItemPostPage } from '@/routes/BlogItemPage/SkeletonBlogItemPostPage';
 
 // With that lazy import and this structure (BlogItemPostPage is a child of BlogItemPrePage),
@@ -13,8 +14,11 @@ const BlogItemPostPage = dynamic(() =>
 
 export const BlogItemPage: ParentComponent = () => {
   return (
-    <BlogItemPrePage>
-      <BlogItemPostPage />
-    </BlogItemPrePage>
+    <PageRenderer
+      deferPostPage={true}
+      postPageLoader={SkeletonBlogItemPostPage}
+      prePage={BlogItemPrePage}
+      postPage={BlogItemPostPage}
+    />
   );
 }

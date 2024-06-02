@@ -7,6 +7,7 @@ import { Header } from '@/components/Header';
 import type { AppProps } from 'next/app';
 import WithQueryClientProvider from '@/components/WithQueryClientProvider';
 import { Page } from '@/components/Page';
+import { createRouteLoader } from '@/lib/route-loader';
 import { useRouter } from 'next/router';
 import { transitionHelper } from '@/lib/transitionHelper';
 import { OptimisticRouterProvider } from 'next-optimistic-router';
@@ -14,9 +15,20 @@ import singletonRouter from 'next/dist/client/router';
 import { ParentComponent } from '@/types/general';
 import { ThemeProvider } from 'next-themes';
 import { ThemeSwitch } from '@/components/ThemeSwitch';
-import { useClientLayoutEffect } from '@/hooks/useClientLayoutEffect';
+
+(() => {
+  if (typeof window === 'undefined') {
+    return;
+  }
+  const routeLoader = createRouteLoader('');
+  routeLoader.prefetch('/').catch((e: string) => { throw new Error(e) });
+  routeLoader.prefetch('/blog/[slug]').catch((e: string) => { throw new Error(e) });
+})()
+
+
 
 const Providers: ParentComponent = ({ children }) => {
+
   return (
     <OptimisticRouterProvider singletonRouter={singletonRouter}>
       <ThemeProvider attribute="class" defaultTheme="dark">
@@ -28,11 +40,6 @@ const Providers: ParentComponent = ({ children }) => {
 
 export default function MyApp({Component, pageProps}: AppProps<{ dehydratedState: DehydratedState}>) {
   const router = useRouter();
-
-  useClientLayoutEffect(() => {
-    router.prefetch('/').catch((e: string) => { throw new Error(e) });
-    router.prefetch('/blog/[slug]').catch((e: string) => { throw new Error(e) });
-  }, [])
 
   useEffect(() => {
     router.prefetch = async () => Promise.resolve(undefined);

@@ -41,6 +41,7 @@ export const BlogItemPrePage: ParentComponent = ({ children}) => {
               priority
               sizes="100vw"
               src={`/${coverAttributes.name}`}
+              thumbhash={coverAttributes.thumbhash}
               alt={coverAttributes.alternativeText}
               width={coverAttributes.width}
               height={coverAttributes.height}

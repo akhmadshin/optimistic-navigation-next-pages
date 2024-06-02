@@ -54,6 +54,7 @@ export const ArticleCard: React.FC<Props> = ({ article, priority }) => {
         <div className="relative w-full">
           <Image
             priority={priority}
+            thumbhash={coverAttributes.thumbhash}
             sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
             ref={imageRef}
             src={`/${coverAttributes.name}`}

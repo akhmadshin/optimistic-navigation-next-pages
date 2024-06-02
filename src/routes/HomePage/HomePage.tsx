@@ -2,6 +2,7 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 
 import { HomePrePage } from '@/routes/HomePage/HomePrePage';
+import { PageRenderer } from '@/components/PageRenderer/PageRenderer';
 import { SkeletonHomePostPage } from '@/routes/HomePage/SkeletonHomePostPage';
 
 // With that lazy import and this structure (HomePostPage is a child of HomePrePage),
@@ -14,8 +15,10 @@ const HomePostPage = dynamic(() => import('@/routes/HomePage/HomePostPage')
 
 export const HomePage = () => {
   return (
-    <HomePrePage>
-      <HomePostPage />
-    </HomePrePage>
+    <PageRenderer
+      postPageLoader={SkeletonHomePostPage}
+      prePage={HomePrePage}
+      postPage={HomePostPage}
+    />
   );
 }
