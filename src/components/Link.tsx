@@ -18,6 +18,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, Props>(function LinkComp
     href,
     beforeTransition,
     afterTransition,
+    placeholderData,
     children,
     ...restProps
   } = props;
@@ -26,7 +27,7 @@ export const Link = React.forwardRef<HTMLAnchorElement, Props>(function LinkComp
       onClick(e);
     }
     handleOptimisticNavigation(props.href, singletonRouter, () => {
-      window.placeholderData = props.placeholderData;
+      window.placeholderData = placeholderData;
       startPageTransition();
     });
   }
