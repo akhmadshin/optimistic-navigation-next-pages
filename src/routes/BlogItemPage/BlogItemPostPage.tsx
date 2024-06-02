@@ -3,13 +3,13 @@ import React from 'react';
 import { RichText } from '@/components/RichText';
 import { usePageData } from '@/hooks/usePageData';
 import { BlogItemPageProps } from '@/pages/blog/[slug]';
-import { SkeletonArticleList } from '@/components/ArticleList/SkeletonArticleList';
+import { SkeletonBlogItemPostPage } from './SkeletonBlogItemPostPage';
 
 export const BlogItemPostPage: Component = () => {
   const { data: article, isLoading, isFetching} = usePageData<BlogItemPageProps>();
 
   if (isLoading || isFetching) {
-    return <SkeletonArticleList/>
+    return <SkeletonBlogItemPostPage />
   }
 
   if (!article) {
