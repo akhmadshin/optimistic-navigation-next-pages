@@ -8,7 +8,7 @@ import type { AppProps } from 'next/app';
 import WithQueryClientProvider from '@/components/WithQueryClientProvider';
 import { Page } from '@/components/Page';
 import { useRouter } from 'next/router';
-import { transitionHelper } from '@/lib/transition-utils';
+import { transitionHelper } from '@/lib/transitionHelper';
 import { OptimisticRouterProvider } from 'next-optimistic-router';
 import singletonRouter from 'next/dist/client/router';
 import { ParentComponent } from '@/types/general';

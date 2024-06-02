@@ -2,7 +2,7 @@ import NextLink, { LinkProps } from 'next/link';
 import React, { AnchorHTMLAttributes, MouseEvent, PropsWithChildren } from 'react';
 import { handleOptimisticNavigation } from 'next-optimistic-router';
 import singletonRouter from 'next/router';
-import { transitionHelper } from '@/lib/transition-utils';
+import { transitionHelper } from '@/lib/transitionHelper';
 
 type NextLinkProps = PropsWithChildren<Omit<AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkProps> &
   LinkProps>
